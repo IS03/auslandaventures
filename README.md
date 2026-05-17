@@ -21,13 +21,20 @@ public/
 1. Leer `docs/brief-ausland.md` y `docs/stack.md`.
 2. Revisar assets en `docs/assets.md`.
 3. Copiar el prompt de `docs/prompt-cursor.md` en el chat de Cursor.
-4. Completar fotos en `public/destinos/` cuando estén listas.
+4. Revisar `docs/fotos-y-contenido.md` (qué flyers hay y qué falta diseñar).
 
 ## Stack previsto
 
 Next.js (App Router) · TypeScript · Tailwind CSS · datos mock · deploy Vercel.
 
-La app Next.js aún no está generada; este repo tiene documentación, datos mock y assets listos para construirla.
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```
+
+Abrí [http://localhost:3000](http://localhost:3000).
 
 ## Contacto (web)
 

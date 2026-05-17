@@ -1,0 +1,90 @@
+import Image from "next/image";
+import { contact, defaultWhatsappMessage, whatsappUrl } from "@/src/data/contact";
+
+const footerLink =
+  "rounded-md text-white/80 transition hover:text-amber focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-light";
+
+export function SiteFooter() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer id="contacto" className="scroll-mt-24 bg-navy-deep text-white">
+      <div className="container-page py-14 sm:py-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="lg:col-span-2">
+            <Image
+              src="/brand/logo-tipografico-blanco.png"
+              alt="Ausland Aventuras"
+              width={180}
+              height={48}
+              className="h-10 w-auto"
+            />
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/75">
+              La aventura de conocer un nuevo destino. Agencia de viajes desde Córdoba, Argentina.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-light">Contacto</h3>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <a
+                  href={whatsappUrl(defaultWhatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`font-semibold text-white hover:text-amber ${footerLink}`}
+                >
+                  WhatsApp {contact.whatsapp.primary.display}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={contact.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={footerLink}
+                >
+                  @{contact.instagram.handle}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${contact.email}`} className={footerLink}>
+                  {contact.email}
+                </a>
+              </li>
+              <li className="text-white/65">{contact.location}</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-light">Enlaces</h3>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>
+                <a href="#viajes" className={footerLink}>
+                  Destinos
+                </a>
+              </li>
+              <li>
+                <a href="#destacados" className={footerLink}>
+                  Destacados
+                </a>
+              </li>
+              <li>
+                <a href="#nosotros" className={footerLink}>
+                  Por qué elegirnos
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/12 pt-8 text-xs leading-relaxed text-white/50 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+          <p>© {year} Ausland Aventuras. Todos los derechos reservados.</p>
+          <p className="max-w-md">
+            Los precios publicados son orientativos y pueden variar. Consultá condiciones al reservar.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
