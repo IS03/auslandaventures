@@ -16,7 +16,7 @@ export function useDestinationFilters() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
 
-    return destinations.filter((d) => {
+    const list = destinations.filter((d) => {
       if (category !== "Todos" && d.category !== category) return false;
       if (!matchesTravelType(d.type, travelType)) return false;
       if (!q) return true;
@@ -28,6 +28,8 @@ export function useDestinationFilters() {
         d.type.toLowerCase().includes(q)
       );
     });
+
+    return [...list].sort((a, b) => Number(b.hasPhoto) - Number(a.hasPhoto));
   }, [query, category, travelType]);
 
   return {

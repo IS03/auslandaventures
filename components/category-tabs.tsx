@@ -20,7 +20,7 @@ const shortLabel: Record<DestinationCategory | "Todos", string> = {
 export function CategoryTabs({ active, onChange }: CategoryTabsProps) {
   return (
     <div
-      className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-hide sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+      className="-mx-4 flex max-w-[100vw] gap-2 overflow-x-auto px-4 pb-1 scrollbar-hide sm:mx-0 sm:max-w-none sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
       role="tablist"
       aria-label="Categorías de viaje"
     >

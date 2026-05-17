@@ -14,6 +14,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -41,11 +42,19 @@
   }
 
   .container-page {
-    @apply mx-auto max-w-6xl px-4 sm:px-6;
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
 
   .hero-text-shadow {
     text-shadow: 0 2px 24px rgba(15, 37, 88, 0.55);
+  }
+
+  .site-header[data-over-light="false"] .site-nav-link {
+    @apply text-white shadow-[0_1px_12px_rgba(15,37,88,0.45)] transition-colors duration-300 hover:text-white;
+  }
+
+  .site-header[data-over-light="true"] .site-nav-link {
+    @apply text-navy shadow-none transition-colors duration-300 hover:text-sky;
   }
 
   .scrollbar-hide {
@@ -55,6 +64,16 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Sin esto, Tailwind `flex` en <dialog> lo deja visible antes de showModal() */
+  .flyer-dialog:not([open]) {
+    display: none !important;
+  }
+
+  .flyer-dialog::backdrop {
+    background: rgba(15, 37, 88, 0.92);
+    backdrop-filter: blur(6px);
   }
 }
 

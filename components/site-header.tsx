@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { defaultWhatsappMessage } from "@/src/data/contact";
 import { WhatsAppButton } from "./whatsapp-button";
 
@@ -14,22 +14,40 @@ const navLinks = [
   { href: "#contacto", label: "Contacto" },
 ];
 
-const navLinkClass = (scrolled: boolean) =>
-  `rounded-lg px-1 py-0.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
-    scrolled
-      ? "text-navy hover:text-sky focus-visible:outline-sky"
-      : "text-white/92 hover:text-white focus-visible:outline-white"
+const navLinkClass = (overLightBg: boolean) =>
+  `site-nav-link rounded-lg px-1 py-0.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+    overLightBg ? "focus-visible:outline-sky" : "focus-visible:outline-white"
   }`;
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const [overLightBg, setOverLightBg] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+  useLayoutEffect(() => {
+    const hero = document.getElementById("hero");
+    const header = headerRef.current;
+    if (!hero || !header) return;
+
+    const update = () => {
+      const headerHeight = header.offsetHeight;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      setOverLightBg(heroBottom <= headerHeight);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    const resizeObserver = new ResizeObserver(update);
+    resizeObserver.observe(hero);
+    resizeObserver.observe(header);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -39,10 +57,21 @@ export function SiteHeader() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || menuOpen
+      ref={headerRef}
+      data-over-light={overLightBg || menuOpen ? "true" : "false"}
+      className={`site-header fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        overLightBg || menuOpen
           ? "border-b border-navy/10 bg-sand/95 py-2.5 shadow-sm backdrop-blur-lg"
           : "bg-gradient-to-b from-navy-deep/60 to-transparent py-3.5 sm:py-4"
       }`}
@@ -53,18 +82,18 @@ export function SiteHeader() {
           className="relative z-10 shrink-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
         >
           <Image
-            src={scrolled || menuOpen ? "/brand/logo-horizontal.png" : "/brand/logo-blanco.png"}
+            src={overLightBg || menuOpen ? "/brand/logo-horizontal.png" : "/brand/logo-blanco.png"}
             alt="Ausland Aventuras — inicio"
             width={150}
             height={44}
             className="h-9 w-auto sm:h-10"
-            priority
+            loading="eager"
           />
         </Link>
 
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Principal">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className={navLinkClass(scrolled || menuOpen)}>
+            <a key={link.href} href={link.href} className={navLinkClass(overLightBg)}>
               {link.label}
             </a>
           ))}
@@ -73,7 +102,7 @@ export function SiteHeader() {
         <div className="hidden lg:block">
           <WhatsAppButton
             message={defaultWhatsappMessage}
-            variant={scrolled || menuOpen ? "primary" : "outline"}
+            variant={overLightBg || menuOpen ? "primary" : "outline"}
             size="sm"
           >
             Consultar
@@ -83,7 +112,7 @@ export function SiteHeader() {
         <button
           type="button"
           className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-xl transition lg:hidden ${
-            scrolled || menuOpen
+            overLightBg || menuOpen
               ? "bg-navy/8 text-navy"
               : "bg-white/12 text-white backdrop-blur-sm"
           } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky`}

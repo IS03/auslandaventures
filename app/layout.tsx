@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Nunito } from "next/font/google";
+import { site } from "@/lib/site";
+import { SkipToContent } from "@/components/skip-to-content";
 import "./globals.css";
 
 const display = DM_Serif_Display({
@@ -16,22 +18,75 @@ const sans = Nunito({
   display: "swap",
 });
 
+const title = `${site.name} | Viajes desde Córdoba`;
+const ogImage = "/brand/logo-horizontal.png";
+
 export const metadata: Metadata = {
-  title: "Ausland Aventuras | Viajes desde Córdoba",
-  description:
-    "La aventura de conocer un nuevo destino. Viajes nacionales, internacionales y salidas regionales. Consultá por WhatsApp.",
-  openGraph: {
-    title: "Ausland Aventuras",
-    description: "Viajes desde Córdoba, Argentina",
-    locale: "es_AR",
-    type: "website",
+  metadataBase: new URL(site.url),
+  title: {
+    default: title,
+    template: `%s | ${site.name}`,
   },
+  description: site.description,
+  keywords: [
+    "viajes Córdoba",
+    "agencia de viajes",
+    "viajes nacionales",
+    "viajes internacionales",
+    "full day Córdoba",
+    "Ausland Aventuras",
+  ],
+  authors: [{ name: site.name }],
+  creator: site.name,
+  openGraph: {
+    type: "website",
+    locale: site.locale,
+    url: site.url,
+    siteName: site.name,
+    title,
+    description: site.description,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — ${site.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: site.description,
+    images: [ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: [{ url: "/brand/logo-cuadrado.png", type: "image/png" }],
+    apple: [{ url: "/brand/logo-cuadrado.png", type: "image/png" }],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0f2558",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${display.variable} ${sans.variable}`}>
-      <body className="min-h-screen">{children}</body>
+    <html
+      lang="es"
+      className={`${display.variable} ${sans.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen overflow-x-hidden" suppressHydrationWarning>
+        <SkipToContent />
+        {children}
+      </body>
     </html>
   );
 }

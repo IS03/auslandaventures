@@ -196,6 +196,7 @@ export const destinationCategories: DestinationCategory[] = [
   "Regionales / Full Day",
 ];
 
-export const featuredDestinations = destinations.filter((destination) => destination.featured);
+/** Solo planes con flyer propio — nada inventado en destacados. */
+export const featuredDestinations = destinations.filter((d) => d.featured && d.hasPhoto);
 
 export const destinationsWithPhoto = destinations.filter((d) => d.hasPhoto);

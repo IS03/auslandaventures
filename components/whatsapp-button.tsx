@@ -6,6 +6,7 @@ type WhatsAppButtonProps = {
   className?: string;
   variant?: "primary" | "outline" | "ghost" | "card";
   size?: "sm" | "md" | "lg";
+  ariaLabel?: string;
 };
 
 const variants = {
@@ -30,12 +31,14 @@ export function WhatsAppButton({
   className = "",
   variant = "primary",
   size = "md",
+  ariaLabel,
 }: WhatsAppButtonProps) {
   return (
     <a
       href={whatsappUrl(message)}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={ariaLabel ?? String(children)}
       className={`inline-flex items-center justify-center rounded-full font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] ${variants[variant]} ${sizes[size]} ${className}`}
     >
       <WhatsAppIcon />

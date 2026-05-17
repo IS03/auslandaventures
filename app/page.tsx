@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main id="contenido" tabIndex={-1} className="outline-none max-lg:pb-4 lg:pb-0">
         <Hero />
         <TripExplorer />
         <FeaturedTrips />

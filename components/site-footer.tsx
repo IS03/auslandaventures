@@ -9,7 +9,7 @@ export function SiteFooter() {
 
   return (
     <footer id="contacto" className="scroll-mt-24 bg-navy-deep text-white">
-      <div className="container-page py-14 sm:py-16">
+      <div className="container-page py-14 max-lg:pb-24 sm:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Image
@@ -17,6 +17,7 @@ export function SiteFooter() {
               alt="Ausland Aventuras"
               width={180}
               height={48}
+              loading="lazy"
               className="h-10 w-auto"
             />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/75">

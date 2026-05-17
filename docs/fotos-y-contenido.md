@@ -12,7 +12,16 @@ Hoy tenés **flyers verticales** (1080×1920) pensados para Instagram/stories, n
 | Cataratas (más fechas) | `public/destinos/planes/cataratas-*.png` | $439k–$569k | Variantes en `travel-plans.ts` |
 | Brasil Canasvieiras | `public/destinos/brasil-canasvieiras.png` | $560.000 | |
 
-Datos detallados por plan: `src/data/travel-plans.ts`.
+Datos detallados por plan: `src/data/travel-plans.ts` (fechas, noches, hotel, inclusiones, excursiones, tiers de alojamiento, letra chica).
+
+| Archivo | Rol |
+|---------|-----|
+| `src/data/plan-types.ts` | Esquema TypeScript (`TravelPlan`, salidas, temporadas, condiciones) |
+| `src/data/travel-plans.ts` | 6 planes extraídos de flyers |
+| `src/data/flyer-catalog.ts` | Qué PNG corresponde a cada `planId` |
+| `src/data/index.ts` | Re-export y helpers (`minPriceForDestination`, etc.) |
+
+Destinos **sin** flyer no tienen entrada en `travel-plans.ts` hasta que subas el diseño.
 
 ## Destinos sin flyer todavía
 

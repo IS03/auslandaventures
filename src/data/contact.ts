@@ -1,4 +1,5 @@
-/** Fuente única de contacto para la web y links de WhatsApp. */
+/** Fuente única de contacto y WhatsApp para toda la web. */
+
 export const contact = {
   location: "Córdoba, Argentina",
   email: "contacto@auslandaventuras.com",
@@ -7,7 +8,6 @@ export const contact = {
     url: "https://instagram.com/auslandaventuras",
   },
   whatsapp: {
-    /** Número principal (flyers / Puerto Madryn). */
     primary: {
       display: "+54 9 351 366-2440",
       e164: "5493513662440",
@@ -19,12 +19,17 @@ export const contact = {
   },
 } as const;
 
+export const defaultWhatsappMessage =
+  "Hola, quiero consultar por un viaje con Ausland Aventuras. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.";
+
+/** Plantilla para mensajes por destino (usada en destinations.ts). */
+export function buildDestinationWhatsappMessage(destinationName: string): string {
+  return `Hola, quiero consultar por el viaje a ${destinationName}. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.`;
+}
+
 export function whatsappUrl(message: string, useSecondary = false): string {
   const number = useSecondary
     ? contact.whatsapp.secondary.e164
     : contact.whatsapp.primary.e164;
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
-
-export const defaultWhatsappMessage =
-  "Hola, quiero consultar por un viaje con Ausland Aventuras. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.";

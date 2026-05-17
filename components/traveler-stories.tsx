@@ -1,45 +1,75 @@
-import { testimonials } from "@/src/data/testimonials";
+import { defaultWhatsappMessage } from "@/src/data/contact";
 import { SectionHeading } from "./section-heading";
+import { WhatsAppButton } from "./whatsapp-button";
 
 export function TravelerStories() {
   return (
-    <section id="experiencias" className="section-padding bg-sand">
+    <section id="experiencias" className="section-padding overflow-x-hidden bg-sand">
       <div className="container-page">
         <SectionHeading
           eyebrow="Comunidad"
           title="Experiencias de viajeros"
-          subtitle="Lo que suele valorar quien viaja con una agencia cercana y bien coordinada."
+          subtitle="Historias y opiniones de quienes viajan con nosotros."
           align="center"
         />
 
-        <p className="mx-auto mt-3 max-w-lg text-center text-xs text-navy-deep/50">
-          Referencias ilustrativas — podés reemplazarlas por testimonios reales cuando los tengas.
-        </p>
+        <div
+          className="relative mx-auto mt-10 max-w-2xl overflow-hidden rounded-3xl bg-white p-8 text-center ring-1 ring-navy/8 sm:mt-12 sm:p-12"
+          role="status"
+          aria-live="polite"
+        >
+          <div
+            className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-sky/10"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-amber/10"
+            aria-hidden
+          />
 
-        <ul className="mt-8 grid list-none gap-5 sm:mt-10 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-          {testimonials.map((t) => (
-            <li key={t.id}>
-              <blockquote className="flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-navy/8">
-                <div className="mb-3 flex gap-0.5 text-amber" aria-label={`${t.rating} de 5`}>
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <span key={i} aria-hidden>
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <p className="flex-1 text-sm leading-relaxed text-navy-deep/80">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <footer className="mt-5 border-t border-navy/8 pt-4">
-                  <cite className="not-italic">
-                    <span className="font-semibold text-navy">{t.name}</span>
-                    <span className="mt-0.5 block text-xs font-medium text-sky">{t.destination}</span>
-                  </cite>
-                </footer>
-              </blockquote>
-            </li>
-          ))}
-        </ul>
+          <div className="relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-navy to-sky text-white shadow-md shadow-navy/15">
+            <svg
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+              />
+            </svg>
+          </div>
+
+          <p className="relative font-display text-xl font-semibold text-navy sm:text-2xl text-balance">
+            Muy pronto vamos a compartir experiencias reales de quienes viajen con Ausland Aventuras.
+          </p>
+
+          <p className="relative mx-auto mt-4 max-w-md text-sm leading-relaxed text-navy-deep/65 sm:text-base">
+            Cuando tengamos reseñas de viajeros, las publicamos acá. Mientras tanto, escribinos y
+            contanos qué destino te interesa.
+          </p>
+
+          <div className="relative mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <WhatsAppButton message={defaultWhatsappMessage} variant="primary" size="md">
+              Consultar por WhatsApp
+            </WhatsAppButton>
+          </div>
+
+          <ul
+            className="relative mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-navy/8 pt-8 text-xs font-semibold uppercase tracking-wide text-navy/40"
+            aria-hidden
+          >
+            <li>Coordinación</li>
+            <li className="text-navy/25">·</li>
+            <li>Confianza</li>
+            <li className="text-navy/25">·</li>
+            <li>Próximamente</li>
+          </ul>
+        </div>
       </div>
     </section>
   );
