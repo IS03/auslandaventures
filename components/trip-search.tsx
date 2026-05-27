@@ -47,7 +47,7 @@ export function TripSearch({
               onChange={(e) => onQueryChange(e.target.value)}
               placeholder="Ej: Salta, Cataratas, playa…"
               aria-label="Buscar destino"
-              className="w-full rounded-2xl border border-navy/12 bg-sand/60 py-3.5 pl-11 pr-4 text-sm text-navy-deep transition placeholder:text-navy-deep/40 focus:border-sky focus:bg-white focus:ring-2 focus:ring-sky/20"
+              className="w-full rounded-2xl border border-navy/12 bg-white/80 py-3.5 pl-11 pr-4 text-sm text-navy-deep transition placeholder:text-navy-deep/40 focus:border-sky focus:bg-white focus:ring-2 focus:ring-sky/20"
             />
           </div>
         </label>
@@ -60,7 +60,7 @@ export function TripSearch({
             value={travelType}
             onChange={(e) => onTravelTypeChange(e.target.value)}
             aria-label="Filtrar por tipo de viaje"
-            className="w-full cursor-pointer appearance-none rounded-2xl border border-navy/12 bg-sand/60 py-3.5 px-4 text-sm text-navy-deep transition focus:border-sky focus:bg-white focus:ring-2 focus:ring-sky/20"
+            className="w-full cursor-pointer appearance-none rounded-2xl border border-navy/12 bg-white/80 py-3.5 px-4 text-sm text-navy-deep transition focus:border-sky focus:bg-white focus:ring-2 focus:ring-sky/20"
           >
             {travelTypes.map((t) => (
               <option key={t} value={t}>
@@ -73,7 +73,7 @@ export function TripSearch({
         <div className="flex flex-col justify-end gap-1.5">
           <span className="text-xs font-bold uppercase tracking-wide text-navy/55">Resultados</span>
           <p
-            className="rounded-2xl border border-navy/8 bg-sand/40 px-4 py-3.5 text-sm text-navy-deep/75"
+            className="rounded-2xl border border-navy/8 bg-white/60 px-4 py-3.5 text-sm text-navy-deep/75"
             aria-live="polite"
           >
             <strong className="font-bold text-navy tabular-nums">{resultCount}</strong>

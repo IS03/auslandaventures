@@ -196,6 +196,44 @@ export const destinationCategories: DestinationCategory[] = [
   "Regionales / Full Day",
 ];
 
+/** Slug para enlaces `/?categoria=…#viajes` al explorador. */
+export const categorySearchParam: Record<DestinationCategory, string> = {
+  Nacionales: "nacionales",
+  Internacionales: "internacionales",
+  "Regionales / Full Day": "regionales",
+};
+
+export function parseCategorySearchParam(
+  value: string | null | undefined,
+): DestinationCategory | null {
+  if (!value) return null;
+  const key = value.trim().toLowerCase();
+  const found = (
+    Object.entries(categorySearchParam) as [DestinationCategory, string][]
+  ).find(([, slug]) => slug === key);
+  return found?.[0] ?? null;
+}
+
+export function hrefForCategoryExplorer(category: DestinationCategory): string {
+  return `/?categoria=${categorySearchParam[category]}#viajes`;
+}
+
+/** Bloques del showcase de categorías (hero de sección tipo “destinos”). */
+export const categoryShowcaseBlocks: { category: DestinationCategory; image: string }[] = [
+  {
+    category: "Nacionales",
+    image: "/postcss.config.jpeg",
+  },
+  {
+    category: "Internacionales",
+    image: "/tumblr_no92j9qFGq1u6olk4o1_1280.jpg",
+  },
+  {
+    category: "Regionales / Full Day",
+    image: "/imagepng.png.webp",
+  },
+];
+
 /** Solo planes con flyer propio — nada inventado en destacados. */
 export const featuredDestinations = destinations.filter((d) => d.featured && d.hasPhoto);
 

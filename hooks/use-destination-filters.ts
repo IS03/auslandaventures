@@ -1,17 +1,27 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { matchesTravelType } from "@/lib/filters";
 import {
   destinations,
+  parseCategorySearchParam,
   type Destination,
   type DestinationCategory,
 } from "@/src/data/destinations";
 
 export function useDestinationFilters() {
+  const searchParams = useSearchParams();
+  const categoriaParam = searchParams.get("categoria");
+
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<DestinationCategory | "Todos">("Todos");
   const [travelType, setTravelType] = useState<string>("Todos");
+
+  useEffect(() => {
+    const fromUrl = parseCategorySearchParam(categoriaParam);
+    if (fromUrl) setCategory(fromUrl);
+  }, [categoriaParam]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

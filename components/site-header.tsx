@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { defaultWhatsappMessage } from "@/src/data/contact";
 import { WhatsAppButton } from "./whatsapp-button";
 
 const navLinks = [
-  { href: "#viajes", label: "Viajes" },
   { href: "#destacados", label: "Destacados" },
+  { href: "#viajes", label: "Viajes" },
   { href: "#nosotros", label: "Nosotros" },
   { href: "#experiencias", label: "Experiencias" },
   { href: "#contacto", label: "Contacto" },
@@ -23,6 +24,11 @@ export function SiteHeader() {
   const headerRef = useRef<HTMLElement>(null);
   const [overLightBg, setOverLightBg] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [portalReady, setPortalReady] = useState(false);
+
+  useLayoutEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   useLayoutEffect(() => {
     const hero = document.getElementById("hero");
@@ -66,93 +72,124 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
-  return (
-    <header
-      ref={headerRef}
-      data-over-light={overLightBg || menuOpen ? "true" : "false"}
-      className={`site-header fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        overLightBg || menuOpen
-          ? "border-b border-navy/10 bg-sand/95 py-2.5 shadow-sm backdrop-blur-lg"
-          : "bg-gradient-to-b from-navy-deep/60 to-transparent py-3.5 sm:py-4"
-      }`}
-    >
-      <div className="container-page flex items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="relative z-10 shrink-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
-        >
-          <Image
-            src={overLightBg || menuOpen ? "/brand/logo-horizontal.png" : "/brand/logo-blanco.png"}
-            alt="Ausland Aventuras — inicio"
-            width={150}
-            height={44}
-            className="h-9 w-auto sm:h-10"
-            loading="eager"
-          />
-        </Link>
+  const closeMenu = () => setMenuOpen(false);
+  const useLightChrome = overLightBg || menuOpen;
 
-        <nav className="hidden items-center gap-5 lg:flex" aria-label="Principal">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className={navLinkClass(overLightBg)}>
-              {link.label}
-            </a>
-          ))}
+  const mobileMenu =
+    portalReady &&
+    createPortal(
+      <div
+        className={`mobile-nav-overlay fixed inset-0 z-40 bg-sage lg:hidden ${menuOpen ? "is-open" : ""}`}
+        aria-hidden={!menuOpen}
+        inert={!menuOpen ? true : undefined}
+      >
+        <nav
+          className="flex h-full min-h-[100dvh] w-full flex-col justify-start px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(6.5rem,calc(5.25rem+env(safe-area-inset-top)))] sm:px-8"
+          aria-label="Menú móvil"
+        >
+          <ul className="flex w-full list-none flex-col">
+            {navLinks.map((link, index) => (
+              <li key={link.href} className="mobile-nav-item w-full">
+                <a
+                  href={link.href}
+                  className="mobile-nav-link block py-5 font-display text-3xl font-semibold leading-tight text-navy transition-colors hover:text-sky focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky active:text-sky sm:py-6"
+                  onClick={closeMenu}
+                  tabIndex={menuOpen ? 0 : -1}
+                >
+                  {link.label}
+                </a>
+                {index < navLinks.length - 1 && (
+                  <div className="mobile-nav-divider" aria-hidden />
+                )}
+              </li>
+            ))}
+          </ul>
         </nav>
+      </div>,
+      document.body,
+    );
 
-        <div className="hidden lg:block">
-          <WhatsAppButton
-            message={defaultWhatsappMessage}
-            variant={overLightBg || menuOpen ? "primary" : "outline"}
-            size="sm"
+  return (
+    <>
+      <header
+        ref={headerRef}
+        data-over-light={useLightChrome ? "true" : "false"}
+        className={`site-header fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 ${
+          useLightChrome
+            ? "border-b border-navy/10 bg-sage/95 py-3 shadow-sm lg:backdrop-blur-lg"
+            : "border-b border-transparent bg-transparent py-3"
+        }`}
+      >
+        <div className="container-page flex items-center justify-between gap-3">
+          <Link
+            href="/"
+            className="relative z-[51] shrink-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+            aria-label="Ausland Aventuras — inicio"
+            onClick={closeMenu}
           >
-            Consultar
-          </WhatsAppButton>
-        </div>
+            <span
+              className="relative block h-9 shrink-0 aspect-[4211/1899] sm:h-10"
+              aria-hidden
+            >
+              <Image
+                src="/brand/logo-horizontal.png"
+                alt=""
+                fill
+                sizes="(max-width: 640px) 80px, 89px"
+                className={`object-contain object-left transition-opacity duration-300 ${
+                  useLightChrome ? "opacity-100" : "opacity-0"
+                }`}
+                priority
+              />
+              <Image
+                src="/brand/logo-blanco.png"
+                alt=""
+                fill
+                sizes="(max-width: 640px) 80px, 89px"
+                className={`object-contain object-left transition-opacity duration-300 ${
+                  useLightChrome ? "opacity-0" : "opacity-100"
+                }`}
+                priority
+              />
+            </span>
+          </Link>
 
-        <button
-          type="button"
-          className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-xl transition lg:hidden ${
-            overLightBg || menuOpen
-              ? "bg-navy/8 text-navy"
-              : "bg-white/12 text-white backdrop-blur-sm"
-          } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky`}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuOpen}
-        >
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-            {menuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </div>
-
-      {menuOpen && (
-        <div className="border-t border-navy/10 bg-sand lg:hidden">
-          <nav className="container-page flex flex-col gap-1 py-4" aria-label="Menú móvil">
+          <nav className="hidden items-center gap-5 lg:flex" aria-label="Principal">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="rounded-xl px-3 py-3 text-base font-semibold text-navy transition hover:bg-sky/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky"
-                onClick={() => setMenuOpen(false)}
-              >
+              <a key={link.href} href={link.href} className={navLinkClass(overLightBg)}>
                 {link.label}
               </a>
             ))}
+          </nav>
+
+          <div className="hidden lg:block">
             <WhatsAppButton
               message={defaultWhatsappMessage}
-              className="mt-3 w-full"
-              size="md"
+              variant={overLightBg ? "primary" : "outline"}
+              size="sm"
             >
-              Consultar por WhatsApp
+              Consultar
             </WhatsAppButton>
-          </nav>
+          </div>
+
+          <button
+            type="button"
+            className={`mobile-nav-menu-btn relative z-[51] h-11 w-11 rounded-xl lg:hidden ${
+              useLightChrome ? "bg-navy/8 text-navy" : "bg-white/12 text-white"
+            } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky`}
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+          >
+            <span className="mobile-nav-bar mobile-nav-bar-top" aria-hidden />
+            <span className="mobile-nav-bar mobile-nav-bar-mid" aria-hidden />
+            <span className="mobile-nav-bar mobile-nav-bar-bot" aria-hidden />
+          </button>
         </div>
-      )}
-    </header>
+      </header>
+
+      <div id="mobile-nav">{mobileMenu}</div>
+    </>
   );
 }

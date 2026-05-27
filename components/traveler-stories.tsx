@@ -1,10 +1,11 @@
-import { defaultWhatsappMessage } from "@/src/data/contact";
 import { SectionHeading } from "./section-heading";
-import { WhatsAppButton } from "./whatsapp-button";
 
 export function TravelerStories() {
   return (
-    <section id="experiencias" className="section-padding overflow-x-hidden bg-sand">
+    <section
+      id="experiencias"
+      className="section-padding section-surface-a section-surface-a--pre-footer overflow-x-hidden"
+    >
       <div className="container-page">
         <SectionHeading
           eyebrow="Comunidad"
@@ -53,19 +54,10 @@ export function TravelerStories() {
             contanos qué destino te interesa.
           </p>
 
-          <div className="relative mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <WhatsAppButton message={defaultWhatsappMessage} variant="primary" size="md">
-              Consultar por WhatsApp
-            </WhatsAppButton>
-          </div>
-
           <ul
-            className="relative mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-navy/8 pt-8 text-xs font-semibold uppercase tracking-wide text-navy/40"
+            className="relative mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-navy/8 pt-8 text-xs font-semibold uppercase tracking-wide text-navy/40"
             aria-hidden
           >
-            <li>Coordinación</li>
-            <li className="text-navy/25">·</li>
-            <li>Confianza</li>
             <li className="text-navy/25">·</li>
             <li>Próximamente</li>
           </ul>

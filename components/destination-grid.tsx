@@ -9,7 +9,7 @@ export function DestinationGrid({ destinations }: DestinationGridProps) {
   if (destinations.length === 0) {
     return (
       <div
-        className="rounded-3xl border-2 border-dashed border-navy/12 bg-white/70 px-6 py-14 text-center sm:py-16"
+        className="rounded-3xl border-2 border-dashed border-navy/15 bg-white px-6 py-14 text-center shadow-card ring-1 ring-navy/10 sm:py-16"
         role="status"
       >
         <p className="font-display text-xl text-navy sm:text-2xl">
@@ -23,10 +23,10 @@ export function DestinationGrid({ destinations }: DestinationGridProps) {
   }
 
   return (
-    <ul className="grid list-none gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7">
+    <ul className="grid list-none grid-cols-2 gap-2.5 max-sm:gap-2 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-7">
       {destinations.map((destination) => (
         <li key={destination.slug} className="min-w-0">
-          <DestinationCard destination={destination} />
+          <DestinationCard destination={destination} compact />
         </li>
       ))}
     </ul>

@@ -55,7 +55,10 @@ const pillars = [
 
 export function WhyAusland() {
   return (
-    <section id="nosotros" className="section-padding bg-white">
+    <section
+      id="nosotros"
+      className="section-padding section-surface-warm"
+    >
       <div className="container-page">
         <SectionHeading
           eyebrow="Confianza"
@@ -67,7 +70,7 @@ export function WhyAusland() {
         <ul className="mt-10 grid list-none gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6">
           {pillars.map((pillar) => (
             <li key={pillar.title}>
-              <article className="group relative h-full overflow-hidden rounded-3xl bg-sand p-6 ring-1 ring-navy/8 transition duration-300 hover:-translate-y-0.5 hover:ring-sky/35 sm:p-8">
+              <article className="group relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-navy/8 transition duration-300 hover:-translate-y-0.5 hover:ring-sky/35 sm:p-8">
                 <div
                   className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-sky/10 transition group-hover:bg-amber/15"
                   aria-hidden

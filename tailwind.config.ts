@@ -23,6 +23,20 @@ const config: Config = {
         },
         coral: "#E3342F",
         sand: "#f7f3eb",
+        /** Superficies — ritmo legible (verde-beige · arena · azul suave) */
+        sage: "#e9ece3",
+        linen: "#ede6d8",
+        haze: "#dfe9f2",
+        mist: "#d4e2ef",
+        /** Cierre de página */
+        shore: "#c0d0e2",
+        "shore-deep": "#a8bdd4",
+        footer: {
+          DEFAULT: "#485c74",
+          edge: "#566a82",
+        },
+        /** Acento oscuro suave (detalles, no navy-deep) */
+        slate: "#5a6f8f",
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],

@@ -19,7 +19,10 @@ export function TripExplorer() {
   } = useDestinationFilters();
 
   return (
-    <section id="viajes" className="section-padding overflow-x-hidden bg-sand">
+    <section
+      id="viajes"
+      className="section-padding section-surface-c overflow-x-hidden"
+    >
       <div className="container-page">
         <SectionHeading
           eyebrow="Explorá"
