@@ -65,8 +65,8 @@ export const destinations: Destination[] = [
     type: "Bus",
     description: "Relax, termas y descanso para cortar la rutina y disfrutar unos días diferentes.",
     priceFrom: null,
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/termas-rio-hondo.png",
+    hasPhoto: true,
     featured: false,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Termas de Río Hondo. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.",
@@ -78,8 +78,8 @@ export const destinations: Destination[] = [
     type: "Bus / Aéreo",
     description: "Montañas, bodegas, paisajes y experiencias para disfrutar una escapada completa.",
     priceFrom: null,
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/mendoza.png",
+    hasPhoto: true,
     featured: false,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Mendoza. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.",
@@ -91,8 +91,8 @@ export const destinations: Destination[] = [
     type: "Bus / Aéreo",
     description: "Ciudad, cultura, espectáculos, compras y paseos para vivir una salida distinta.",
     priceFrom: null,
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/buenos-aires.png",
+    hasPhoto: true,
     featured: false,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Buenos Aires. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.",
