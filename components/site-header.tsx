@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { defaultWhatsappMessage } from "@/src/data/contact";
@@ -13,7 +14,12 @@ const navLinks = [
   { href: "#nosotros", label: "Nosotros" },
   { href: "#experiencias", label: "Experiencias" },
   { href: "#contacto", label: "Contacto" },
-];
+] as const;
+
+/** En la home usa ancla local; en subpáginas vuelve al inicio y a la sección. */
+function resolveNavHref(pathname: string, hash: string): string {
+  return pathname === "/" ? hash : `/${hash}`;
+}
 
 const navLinkClass = (overLightBg: boolean) =>
   `site-nav-link rounded-lg px-1 py-0.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
@@ -21,6 +27,7 @@ const navLinkClass = (overLightBg: boolean) =>
   }`;
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [overLightBg, setOverLightBg] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,7 +40,10 @@ export function SiteHeader() {
   useLayoutEffect(() => {
     const hero = document.getElementById("hero");
     const header = headerRef.current;
-    if (!hero || !header) return;
+    if (!hero || !header) {
+      setOverLightBg(pathname !== "/");
+      return;
+    }
 
     const update = () => {
       const headerHeight = header.offsetHeight;
@@ -54,7 +64,7 @@ export function SiteHeader() {
       window.removeEventListener("resize", update);
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -90,14 +100,14 @@ export function SiteHeader() {
           <ul className="flex w-full list-none flex-col">
             {navLinks.map((link, index) => (
               <li key={link.href} className="mobile-nav-item w-full">
-                <a
-                  href={link.href}
+                <Link
+                  href={resolveNavHref(pathname, link.href)}
                   className="mobile-nav-link block py-5 font-display text-3xl font-semibold leading-tight text-navy transition-colors hover:text-sky focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky active:text-sky sm:py-6"
                   onClick={closeMenu}
                   tabIndex={menuOpen ? 0 : -1}
                 >
                   {link.label}
-                </a>
+                </Link>
                 {index < navLinks.length - 1 && (
                   <div className="mobile-nav-divider" aria-hidden />
                 )}
@@ -156,9 +166,13 @@ export function SiteHeader() {
 
           <nav className="hidden items-center gap-5 lg:flex" aria-label="Principal">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className={navLinkClass(overLightBg)}>
+              <Link
+                key={link.href}
+                href={resolveNavHref(pathname, link.href)}
+                className={navLinkClass(overLightBg)}
+              >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 

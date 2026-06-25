@@ -1,6 +1,6 @@
 /** Tipos compartidos para planes extraídos de flyers (1080×1920). */
 
-export type PlanCurrency = "ARS";
+export type PlanCurrency = "ARS" | "USD";
 
 /** Salida con fecha parcial (año = temporada del flyer; confirmar con la agencia). */
 export type PlanDeparture = {
@@ -45,6 +45,14 @@ export const defaultDomesticPlanTerms: PlanTerms = {
   otherExclusions: [],
 };
 
+/** Exclusiones típicas de planes nacionales según información básica de destinos. */
+export const domesticExclusionsFromBasicInfo = [
+  "Ingresos a parques no incluidos.",
+  "Guías locales no incluidos.",
+  "Comidas en ruta no incluidas.",
+  "Gastos extras no incluidos en el programa.",
+];
+
 export const cataratasPlanTerms: PlanTerms = {
   currency: "ARS",
   perPerson: true,
@@ -56,6 +64,16 @@ export const cataratasPlanTerms: PlanTerms = {
     "De 4 a 11 años: tarifa menor aplica solo para un menor acompañado por 2 adultos.",
   ],
   otherExclusions: ["Entradas y guías de excursiones no incluidos."],
+};
+
+export const internationalPlanTerms: PlanTerms = {
+  currency: "USD",
+  perPerson: true,
+  taxesIncluded: false,
+  occupancyBasis: "Cotización en base doble (2 adultos); consultar diferencia en otras bases.",
+  adminFeeNote: "Hotelería y precio sujetos a confirmación al momento de la reserva.",
+  childPolicy: [],
+  otherExclusions: [],
 };
 
 export type TravelPlan = {
@@ -72,7 +90,8 @@ export type TravelPlan = {
   hotel?: string;
   accommodationTiers?: AccommodationTier[];
   mealPlan: string;
-  priceFrom: number;
+  /** Omitir si el precio es solo por consulta (sin tarifa publicada en la info básica). */
+  priceFrom?: number;
   currency: PlanCurrency;
   /** Flyer principal del plan (card / detalle). */
   image: string;

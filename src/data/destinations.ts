@@ -1,5 +1,7 @@
 export type DestinationCategory = "Nacionales" | "Internacionales" | "Regionales / Full Day";
 
+export type DestinationPriceCurrency = "ARS" | "USD";
+
 export type Destination = {
   slug: string;
   title: string;
@@ -7,18 +9,42 @@ export type Destination = {
   type: string;
   description: string;
   priceFrom: number | null;
+  /** Moneda de `priceFrom` cuando no hay plan en travel-plans (default ARS). */
+  priceCurrency?: DestinationPriceCurrency;
   /** Ruta en /public. Flyers verticales 1080×1920 — en cards usar object-cover. */
   image: string;
   /** true si hay flyer/foto propia; false usa imagen de marca genérica. */
   hasPhoto: boolean;
   featured: boolean;
+  /** Tiene al menos un plan con detalle en travel-plans.ts */
+  hasTravelPlan: boolean;
   whatsappMessage: string;
 };
+
+type DestinationInput = Omit<Destination, "hasTravelPlan">;
+
+/** Mantener sincronizado con los destinationSlug de travel-plans.ts */
+const SLUGS_WITH_TRAVEL_PLANS = new Set<string>([
+  "puerto-madryn",
+  "salta",
+  "cataratas",
+  "termas-rio-hondo",
+  "mendoza",
+  "buenos-aires",
+  "brasil-canasvieiras",
+  "mexico-cancun",
+  "mexico-playa-del-carmen",
+  "punta-cana",
+  "brasil-rio-de-janeiro",
+  "aruba",
+  "maceio",
+  "bayahibe",
+]);
 
 /** Imagen de respaldo para destinos sin flyer (logo sobre fondo de marca en UI). */
 export const destinationImageFallback = "/brand/logo-horizontal.png";
 
-export const destinations: Destination[] = [
+const destinationList: DestinationInput[] = [
   {
     slug: "puerto-madryn",
     title: "Puerto Madryn",
@@ -124,17 +150,99 @@ export const destinations: Destination[] = [
       "Hola, quiero consultar por el viaje a Brasil Torres. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.",
   },
   {
-    slug: "caribe",
-    title: "Caribe",
+    slug: "mexico-cancun",
+    title: "México — Cancún",
     category: "Internacionales",
     type: "Aéreo",
-    description: "Playas paradisíacas, aguas turquesas y una experiencia soñada para desconectar.",
+    description: "Playa, sol y all inclusive en uno de los destinos más buscados del Caribe mexicano.",
     priceFrom: null,
     image: destinationImageFallback,
     hasPhoto: false,
     featured: true,
     whatsappMessage:
-      "Hola, quiero consultar por opciones de viaje al Caribe. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.",
+      "Hola, quiero consultar por el viaje a Cancún. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
+  },
+  {
+    slug: "mexico-playa-del-carmen",
+    title: "México — Playa del Carmen",
+    category: "Internacionales",
+    type: "Aéreo",
+    description: "Riviera Maya, playas y resorts para una escapada completa al Caribe mexicano.",
+    priceFrom: null,
+    image: destinationImageFallback,
+    hasPhoto: false,
+    featured: false,
+    whatsappMessage:
+      "Hola, quiero consultar por el viaje a Playa del Carmen. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
+  },
+  {
+    slug: "punta-cana",
+    title: "Punta Cana",
+    category: "Internacionales",
+    type: "Aéreo",
+    description: "República Dominicana: playas de ensueño y resorts all inclusive en el corazón del Caribe.",
+    priceFrom: 2050,
+    priceCurrency: "USD",
+    image: destinationImageFallback,
+    hasPhoto: false,
+    featured: true,
+    whatsappMessage:
+      "Hola, quiero consultar por el viaje a Punta Cana. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
+  },
+  {
+    slug: "brasil-rio-de-janeiro",
+    title: "Brasil — Río de Janeiro",
+    category: "Internacionales",
+    type: "Aéreo",
+    description: "Ciudad maravillosa, playas icónicas y la energía única de Río en grupo.",
+    priceFrom: null,
+    image: destinationImageFallback,
+    hasPhoto: false,
+    featured: false,
+    whatsappMessage:
+      "Hola, quiero consultar por el viaje a Río de Janeiro. Somos [CANTIDAD] personas y queremos saber fechas y precio.",
+  },
+  {
+    slug: "aruba",
+    title: "Aruba",
+    category: "Internacionales",
+    type: "Aéreo",
+    description: "Aguas turquesas y estadías en estudios equipados con opciones para todos los presupuestos.",
+    priceFrom: 1390,
+    priceCurrency: "USD",
+    image: destinationImageFallback,
+    hasPhoto: false,
+    featured: false,
+    whatsappMessage:
+      "Hola, quiero consultar por el viaje a Aruba. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
+  },
+  {
+    slug: "maceio",
+    title: "Maceio / Maragogi",
+    category: "Internacionales",
+    type: "Aéreo",
+    description: "Nordeste brasileño: playas, piscinas naturales y alojamiento con desayuno en Maceió o Maragogi.",
+    priceFrom: 1150,
+    priceCurrency: "USD",
+    image: destinationImageFallback,
+    hasPhoto: false,
+    featured: false,
+    whatsappMessage:
+      "Hola, quiero consultar por el viaje a Maceió o Maragogi. Somos [CANTIDAD] personas y queremos saber fechas y precio.",
+  },
+  {
+    slug: "bayahibe",
+    title: "Bayahibe",
+    category: "Internacionales",
+    type: "Aéreo",
+    description: "República Dominicana all inclusive en Sunscape Dominicus La Romana, cerca de Punta Cana.",
+    priceFrom: 2170,
+    priceCurrency: "USD",
+    image: destinationImageFallback,
+    hasPhoto: false,
+    featured: false,
+    whatsappMessage:
+      "Hola, quiero consultar por el viaje a Bayahibe. Somos [CANTIDAD] personas y queremos saber fechas y precio.",
   },
   {
     slug: "cura-brochero",
@@ -190,6 +298,11 @@ export const destinations: Destination[] = [
   },
 ];
 
+export const destinations: Destination[] = destinationList.map((d) => ({
+  ...d,
+  hasTravelPlan: SLUGS_WITH_TRAVEL_PLANS.has(d.slug),
+}));
+
 export const destinationCategories: DestinationCategory[] = [
   "Nacionales",
   "Internacionales",
@@ -234,7 +347,29 @@ export const categoryShowcaseBlocks: { category: DestinationCategory; image: str
   },
 ];
 
+/** Imagen de respaldo por categoría para cards sin flyer. */
+export const categoryPlaceholderImage: Record<DestinationCategory, string> = {
+  Nacionales: categoryShowcaseBlocks[0].image,
+  Internacionales: categoryShowcaseBlocks[1].image,
+  "Regionales / Full Day": categoryShowcaseBlocks[2].image,
+};
+
+/** Etiqueta corta para badges en móvil. */
+export const categoryShortLabel: Record<DestinationCategory, string> = {
+  Nacionales: "Nacional",
+  Internacionales: "Internacional",
+  "Regionales / Full Day": "Regional",
+};
+
 /** Solo planes con flyer propio — nada inventado en destacados. */
 export const featuredDestinations = destinations.filter((d) => d.featured && d.hasPhoto);
 
 export const destinationsWithPhoto = destinations.filter((d) => d.hasPhoto);
+
+export function destinationBySlug(slug: string): Destination | undefined {
+  return destinations.find((d) => d.slug === slug);
+}
+
+export function hrefForDestination(slug: string): string {
+  return `/destinos/${slug}`;
+}

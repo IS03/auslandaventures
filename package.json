@@ -2,6 +2,23 @@
   "name": "auslandaventures",
   "version": "0.1.0",
   "private": true,
+  "description": "Landing y sitio de la agencia de viajes **Ausland Aventuras** (Córdoba, Argentina). WhatsApp-first: mostrar destinos, categorías y generar consultas.",
+  "homepage": "https://github.com/IS03/auslandaventures#readme",
+  "bugs": {
+    "url": "https://github.com/IS03/auslandaventures/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IS03/auslandaventures.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

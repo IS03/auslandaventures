@@ -25,7 +25,7 @@ export function DestinationGrid({ destinations }: DestinationGridProps) {
   return (
     <ul className="grid list-none grid-cols-2 gap-2.5 max-sm:gap-2 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-7">
       {destinations.map((destination) => (
-        <li key={destination.slug} className="min-w-0">
+        <li key={destination.slug} className="flex min-w-0 h-full">
           <DestinationCard destination={destination} compact />
         </li>
       ))}

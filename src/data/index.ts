@@ -1,9 +1,14 @@
 export {
   destinations,
+  destinationBySlug,
+  hrefForDestination,
   destinationCategories,
   destinationImageFallback,
   featuredDestinations,
   destinationsWithPhoto,
+  categoryShowcaseBlocks,
+  categoryPlaceholderImage,
+  categoryShortLabel,
   type Destination,
   type DestinationCategory,
 } from "./destinations";
@@ -18,6 +23,7 @@ export {
   formatDeparturesShort,
   getDestinationCardMeta,
   getFlyerImagesForDestination,
+  currencyForDestination,
   type TravelPlan,
   type PlanDeparture,
   type AccommodationTier,
