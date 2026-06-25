@@ -12,7 +12,7 @@ export function FeaturedTrips() {
         <SectionHeading
           eyebrow="Imperdibles"
           title="Viajes destacados"
-          subtitle="Planes con fechas y precios publicados. El resto del catálogo lo confirmamos por WhatsApp."
+          subtitle="Planes con información publicada: fechas, precios e inclusiones. Consultá el resto por WhatsApp."
         />
 
         <ul className="scrollbar-hide -mx-4 mt-9 flex list-none gap-4 overflow-x-auto px-4 pb-2 snap-x snap-mandatory sm:mt-10 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3 lg:gap-7">

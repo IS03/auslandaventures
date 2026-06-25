@@ -1,3 +1,9 @@
+import {
+  currencyForDestination,
+  minPriceForDestination,
+  travelPlans,
+} from "./travel-plans";
+
 export type DestinationCategory = "Nacionales" | "Internacionales" | "Regionales / Full Day";
 
 export type DestinationPriceCurrency = "ARS" | "USD";
@@ -21,25 +27,13 @@ export type Destination = {
   whatsappMessage: string;
 };
 
-type DestinationInput = Omit<Destination, "hasTravelPlan">;
+type DestinationInput = Omit<Destination, "hasTravelPlan" | "priceFrom" | "priceCurrency"> & {
+  /** Fallback si no hay plan en travel-plans.ts */
+  priceFrom?: number | null;
+  priceCurrency?: DestinationPriceCurrency;
+};
 
-/** Mantener sincronizado con los destinationSlug de travel-plans.ts */
-const SLUGS_WITH_TRAVEL_PLANS = new Set<string>([
-  "puerto-madryn",
-  "salta",
-  "cataratas",
-  "termas-rio-hondo",
-  "mendoza",
-  "buenos-aires",
-  "brasil-canasvieiras",
-  "mexico-cancun",
-  "mexico-playa-del-carmen",
-  "punta-cana",
-  "brasil-rio-de-janeiro",
-  "aruba",
-  "maceio",
-  "bayahibe",
-]);
+const SLUGS_WITH_TRAVEL_PLANS = new Set(travelPlans.map((p) => p.destinationSlug));
 
 /** Imagen de respaldo para destinos sin flyer (logo sobre fondo de marca en UI). */
 export const destinationImageFallback = "/brand/logo-horizontal.png";
@@ -298,10 +292,18 @@ const destinationList: DestinationInput[] = [
   },
 ];
 
-export const destinations: Destination[] = destinationList.map((d) => ({
-  ...d,
-  hasTravelPlan: SLUGS_WITH_TRAVEL_PLANS.has(d.slug),
-}));
+export const destinations: Destination[] = destinationList.map((d) => {
+  const hasTravelPlan = SLUGS_WITH_TRAVEL_PLANS.has(d.slug);
+  const planPrice = minPriceForDestination(d.slug);
+  const planCurrency = currencyForDestination(d.slug);
+
+  return {
+    ...d,
+    hasTravelPlan,
+    priceFrom: planPrice ?? d.priceFrom ?? null,
+    priceCurrency: planCurrency ?? d.priceCurrency ?? "ARS",
+  };
+});
 
 export const destinationCategories: DestinationCategory[] = [
   "Nacionales",
@@ -335,15 +337,15 @@ export function hrefForCategoryExplorer(category: DestinationCategory): string {
 export const categoryShowcaseBlocks: { category: DestinationCategory; image: string }[] = [
   {
     category: "Nacionales",
-    image: "/postcss.config.jpeg",
+    image: "/categorias/nacionales.jpeg",
   },
   {
     category: "Internacionales",
-    image: "/tumblr_no92j9qFGq1u6olk4o1_1280.jpg",
+    image: "/categorias/internacionales.jpg",
   },
   {
     category: "Regionales / Full Day",
-    image: "/imagepng.png.webp",
+    image: "/categorias/regionales.webp",
   },
 ];
 
@@ -361,8 +363,10 @@ export const categoryShortLabel: Record<DestinationCategory, string> = {
   "Regionales / Full Day": "Regional",
 };
 
-/** Solo planes con flyer propio — nada inventado en destacados. */
-export const featuredDestinations = destinations.filter((d) => d.featured && d.hasPhoto);
+/** Destacados: con flyer o con plan publicado (fechas/precios). */
+export const featuredDestinations = destinations.filter(
+  (d) => d.featured && (d.hasPhoto || d.hasTravelPlan),
+);
 
 export const destinationsWithPhoto = destinations.filter((d) => d.hasPhoto);
 

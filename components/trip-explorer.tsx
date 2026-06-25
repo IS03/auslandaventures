@@ -42,7 +42,9 @@ export function TripExplorer() {
 
           <CategoryTabs active={category} onChange={setCategory} />
 
-          <DestinationGrid destinations={filtered} />
+          <div id="resultados-viajes" role="region" aria-label="Resultados de búsqueda">
+            <DestinationGrid destinations={filtered} />
+          </div>
         </div>
       </div>
     </section>

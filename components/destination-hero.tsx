@@ -20,8 +20,11 @@ export function DestinationHero({
   priceFrom,
   priceCurrency,
 }: DestinationHeroProps) {
-  const { title, category, type, description } = destination;
-  const bannerSrc = categoryPlaceholderImage[category];
+  const { title, category, type, description, hasPhoto, image } = destination;
+  const bannerSrc = hasPhoto ? image : categoryPlaceholderImage[category];
+  const bannerClass = hasPhoto
+    ? "object-cover object-[center_22%]"
+    : "object-cover object-center";
 
   return (
     <section
@@ -34,7 +37,7 @@ export function DestinationHero({
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center"
+        className={bannerClass}
         aria-hidden
       />
 
@@ -47,18 +50,20 @@ export function DestinationHero({
         aria-hidden
       />
 
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden pr-[8%] opacity-[0.07]"
-        aria-hidden
-      >
-        <Image
-          src={destinationImageFallback}
-          alt=""
-          width={280}
-          height={80}
-          className="brightness-0 invert"
-        />
-      </div>
+      {!hasPhoto && (
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden pr-[8%] opacity-[0.07]"
+          aria-hidden
+        >
+          <Image
+            src={destinationImageFallback}
+            alt=""
+            width={280}
+            height={80}
+            className="brightness-0 invert"
+          />
+        </div>
+      )}
 
       <div className="container-page relative flex min-h-[min(48vh,26rem)] flex-col justify-end pb-10 pt-28 sm:pb-14 sm:pt-32">
         <div className="flex flex-wrap items-end justify-between gap-4">

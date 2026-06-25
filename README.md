@@ -1,31 +1,38 @@
 # Ausland Aventuras — Web
 
-Landing y sitio de la agencia de viajes **Ausland Aventuras** (Córdoba, Argentina). WhatsApp-first: mostrar destinos, categorías y generar consultas.
+Sitio de la agencia de viajes **Ausland Aventuras** (Córdoba, Argentina). WhatsApp-first: catálogo de destinos, detalle por viaje y consultas directas.
 
 ## Estructura del repo
 
 ```txt
-.cursor/
-  rules/project-ausland.md    # Reglas de producto y diseño
-  skills/frontend-design/     # Skill de UI (Anthropic)
-docs/                         # Brief, stack, prompt, contacto, assets
-src/data/                     # destinations.ts, contact.ts
+app/
+  page.tsx                    # Home (landing)
+  destinos/[slug]/page.tsx    # Detalle por destino (SSG)
+  layout.tsx, sitemap.ts, robots.ts
+components/                   # UI (hero, cards, explorador, detalle…)
+hooks/                        # Filtros de destinos (URL + estado)
+lib/                          # site, format, filters, plan-display
+src/data/
+  destinations.ts             # Catálogo (19 destinos)
+  travel-plans.ts             # Planes extraídos de flyers e info básica
+  contact.ts                  # WhatsApp, email, Instagram
 public/
   brand/                      # Logos
-  destinos/                   # Fotos de destinos (pendientes)
-  marketing/                  # Flyers verticales para redes
+  categorias/                 # Imágenes por tipo de viaje
+  destinos/                   # Flyers verticales 1080×1920
+  hero/                       # Foto principal del home
+docs/                         # Brief, stack, assets, contenido
 ```
 
-## Cómo arrancar con Cursor
+## Cómo arrancar
 
 1. Leer `docs/brief-ausland.md` y `docs/stack.md`.
-2. Revisar assets en `docs/assets.md`.
-3. Copiar el prompt de `docs/prompt-cursor.md` en el chat de Cursor.
-4. Revisar `docs/fotos-y-contenido.md` (qué flyers hay y qué falta diseñar).
+2. Revisar assets en `docs/assets.md` y `docs/fotos-y-contenido.md`.
+3. Fuente de datos de negocio: `INFORMACIÓN BÁSICA DE DESTINOS.md` (raíz) → `src/data/travel-plans.ts`.
 
-## Stack previsto
+## Stack
 
-Next.js (App Router) · TypeScript · Tailwind CSS · datos mock · deploy Vercel.
+Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS · datos en TS · deploy Vercel.
 
 ## Desarrollo local
 
@@ -36,6 +43,19 @@ npm run dev
 
 Abrí [http://localhost:3000](http://localhost:3000).
 
+## Scripts
+
+| Comando | Descripción |
+|---------|-------------|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción (genera páginas `/destinos/*`) |
+| `npm run lint` | ESLint |
+| `npm run start` | Servidor de producción |
+
 ## Contacto (web)
 
 Ver `docs/contacto.md` y `src/data/contact.ts`.
+
+## Reporte de mejoras
+
+Ver `docs/REPORTE-MEJORAS.md` para el detalle de cambios recientes.
