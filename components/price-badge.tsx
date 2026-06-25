@@ -24,7 +24,8 @@ export function PriceBadge({
   className = "",
 }: PriceBadgeProps) {
   const resolvedVariant: PriceBadgeVariant = variant ?? (onDark ? "hero" : "chip");
-  const formatted = amount !== null ? formatAmount(amount, currency) : null;
+  const resolvedCurrency: PlanCurrency = currency ?? "ARS";
+  const formatted = amount !== null ? formatAmount(amount, resolvedCurrency) : null;
 
   if (resolvedVariant === "card") {
     if (formatted === null) {
