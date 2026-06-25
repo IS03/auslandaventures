@@ -333,6 +333,15 @@ export function hrefForCategoryExplorer(category: DestinationCategory): string {
   return `/?categoria=${categorySearchParam[category]}#viajes`;
 }
 
+/** URL indexable de landing por categoría (SEO). */
+export function hrefForCategoryPage(category: DestinationCategory): string {
+  return `/viajes/${categorySearchParam[category]}`;
+}
+
+export function destinationsInCategory(category: DestinationCategory): Destination[] {
+  return destinations.filter((d) => d.category === category);
+}
+
 /** Bloques del showcase de categorías (hero de sección tipo “destinos”). */
 export const categoryShowcaseBlocks: { category: DestinationCategory; image: string }[] = [
   {

@@ -1,12 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { type MouseEvent, useCallback } from "react";
 import {
   categoryShowcaseBlocks,
-  hrefForCategoryExplorer,
+  hrefForCategoryPage,
   type DestinationCategory,
 } from "@/src/data/destinations";
 
@@ -27,46 +23,21 @@ export function CategoryMosaicCard({
   className?: string;
   priority?: boolean;
 }) {
-  const router = useRouter();
   const title = displayTitle[block.category];
-  const href = hrefForCategoryExplorer(block.category);
-
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLAnchorElement>) => {
-      event.preventDefault();
-
-      router.push(href, { scroll: false });
-
-      const target = document.getElementById("viajes");
-      if (!target) return;
-
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
-      target.scrollIntoView({
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-        block: "start",
-      });
-    },
-    [href, router],
-  );
+  const href = hrefForCategoryPage(block.category);
 
   return (
     <Link
       href={href}
-      scroll={false}
-      onClick={handleClick}
       className={`group relative isolate overflow-hidden rounded-2xl ring-1 ring-navy/10 transition-transform duration-300 hover:-translate-y-0.5 hover:ring-sky/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky sm:rounded-3xl ${className ?? ""}`}
     >
       <Image
         src={block.image}
-        alt=""
+        alt={`Viajes ${title.toLowerCase()} desde Córdoba`}
         fill
         priority={priority}
         sizes="(max-width: 1024px) 100vw, 58vw"
         className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-        aria-hidden
       />
       <div
         className="absolute inset-0 bg-gradient-to-t from-navy-deep/95 via-navy-deep/45 to-navy-deep/15"

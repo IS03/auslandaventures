@@ -26,6 +26,8 @@ export function DestinationHero({
     ? "object-cover object-[center_22%]"
     : "object-cover object-center";
 
+  const bannerAlt = `Viaje a ${title} desde Córdoba — ${category}`;
+
   return (
     <section
       id="hero"
@@ -33,12 +35,11 @@ export function DestinationHero({
     >
       <Image
         src={bannerSrc}
-        alt=""
+        alt={bannerAlt}
         fill
         priority
         sizes="100vw"
         className={bannerClass}
-        aria-hidden
       />
 
       <div

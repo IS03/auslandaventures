@@ -60,6 +60,17 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-white/12 pt-9 text-xs leading-relaxed text-white/50 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
           <p>© {year} Ausland Aventuras. Todos los derechos reservados.</p>
+          <nav aria-label="Categorías de viajes" className="flex flex-wrap gap-x-4 gap-y-1">
+            <a href="/viajes/nacionales" className={footerLink}>
+              Nacionales
+            </a>
+            <a href="/viajes/internacionales" className={footerLink}>
+              Internacionales
+            </a>
+            <a href="/viajes/regionales" className={footerLink}>
+              Regionales
+            </a>
+          </nav>
           <p className="max-w-md">
             Los precios publicados son orientativos y pueden variar. Consultá condiciones al reservar.
           </p>

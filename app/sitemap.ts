@@ -1,11 +1,21 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
-import { destinations } from "@/src/data/destinations";
+import { absoluteUrl } from "@/lib/seo";
+import { categoryPages } from "@/src/data/category-pages";
+import { destinations, hrefForCategoryPage } from "@/src/data/destinations";
+
+/** Pre-render estático en build; evita errores en runtime en producción. */
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const categoryUrls = categoryPages.map((page) => ({
+    url: absoluteUrl(hrefForCategoryPage(page.category)),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
+
   const destinationUrls = destinations.map((d) => ({
-    url: `${site.url}/destinos/${d.slug}`,
-    lastModified: new Date(),
+    url: absoluteUrl(`/destinos/${d.slug}`),
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
@@ -13,10 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: site.url,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
+    ...categoryUrls,
     ...destinationUrls,
   ];
 }

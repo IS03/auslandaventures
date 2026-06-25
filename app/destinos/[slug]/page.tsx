@@ -2,12 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DestinationDetailView } from "@/components/destination-detail-view";
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
-import { site } from "@/lib/site";
-import { destinationBySlug, destinations } from "@/src/data/destinations";
-import { plansByDestination } from "@/src/data/travel-plans";
+import {
+  breadcrumbJsonLd,
+  buildDestinationMetadata,
+  destinationTripJsonLd,
+} from "@/lib/seo";
+import { destinationBySlug, destinations, hrefForDestination } from "@/src/data/destinations";
+import {
+  currencyForDestination,
+  minPriceForDestination,
+  plansByDestination,
+} from "@/src/data/travel-plans";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -24,17 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Destino no encontrado" };
   }
 
-  const title = `Viaje a ${destination.title}`;
-  const description = `${destination.description} Consultá fechas, inclusiones y precios con ${site.name}.`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title: `${title} | ${site.name}`,
-      description,
-    },
-  };
+  return buildDestinationMetadata(destination);
 }
 
 export default async function DestinationPage({ params }: PageProps) {
@@ -46,9 +45,20 @@ export default async function DestinationPage({ params }: PageProps) {
   }
 
   const plans = plansByDestination(slug);
+  const priceFrom = minPriceForDestination(slug) ?? destination.priceFrom;
+  const priceCurrency = currencyForDestination(slug) ?? destination.priceCurrency ?? "ARS";
+
+  const jsonLd = [
+    breadcrumbJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: destination.title, path: hrefForDestination(slug) },
+    ]),
+    destinationTripJsonLd(destination, plans, priceFrom, priceCurrency),
+  ];
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <SiteHeader />
       <main id="contenido" tabIndex={-1} className="outline-none max-lg:pb-4 lg:pb-0">
         <DestinationDetailView destination={destination} plans={plans} />

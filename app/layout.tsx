@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Nunito } from "next/font/google";
-import { site } from "@/lib/site";
+import { JsonLd } from "@/components/json-ld";
 import { SkipToContent } from "@/components/skip-to-content";
+import { defaultOgImage, travelAgencyJsonLd, webSiteJsonLd } from "@/lib/seo";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const display = DM_Serif_Display({
@@ -19,7 +21,7 @@ const sans = Nunito({
 });
 
 const title = `${site.name} | Viajes desde Córdoba`;
-const ogImage = "/brand/logo-horizontal.png";
+const ogImage = defaultOgImage;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -28,6 +30,9 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "viajes Córdoba",
     "agencia de viajes",
@@ -48,8 +53,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: ogImage,
-        width: 1200,
-        height: 630,
         alt: `${site.name} — ${site.tagline}`,
       },
     ],
@@ -84,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="min-h-screen overflow-x-hidden" suppressHydrationWarning>
+        <JsonLd data={[travelAgencyJsonLd(), webSiteJsonLd()]} />
         <SkipToContent />
         {children}
       </body>
