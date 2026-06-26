@@ -22,9 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: site.url,
+      url: site.url.replace(/\/$/, ""),
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: absoluteUrl("/nosotros"),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     ...categoryUrls,
     ...destinationUrls,

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Serif_Display, Nunito } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
 import { SkipToContent } from "@/components/skip-to-content";
-import { defaultOgImage, travelAgencyJsonLd, webSiteJsonLd } from "@/lib/seo";
+import { travelAgencyJsonLd, webSiteJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -21,7 +21,6 @@ const sans = Nunito({
 });
 
 const title = `${site.name} | Viajes desde Córdoba`;
-const ogImage = defaultOgImage;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -50,18 +49,11 @@ export const metadata: Metadata = {
     siteName: site.name,
     title,
     description: site.description,
-    images: [
-      {
-        url: ogImage,
-        alt: `${site.name} — ${site.tagline}`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description: site.description,
-    images: [ogImage],
   },
   robots: {
     index: true,

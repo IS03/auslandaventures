@@ -29,7 +29,6 @@ export function buildDestinationMetadata(destination: Destination): Metadata {
   const title = `Viaje a ${destination.title}`;
   const description = `${destination.description} Consultá fechas, inclusiones y precios con ${site.name}.`;
   const url = absoluteUrl(`/destinos/${destination.slug}`);
-  const ogImage = ogImageForDestination(destination);
   const indexable = destinationIsIndexable(destination);
 
   return {
@@ -43,18 +42,11 @@ export function buildDestinationMetadata(destination: Destination): Metadata {
       siteName: site.name,
       title: `${title} | ${site.name}`,
       description,
-      images: [
-        {
-          url: ogImage,
-          alt: `Viaje a ${destination.title} desde Córdoba — ${site.name}`,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | ${site.name}`,
       description,
-      images: [ogImage],
     },
     robots: indexable
       ? { index: true, follow: true }

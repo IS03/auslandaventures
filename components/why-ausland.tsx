@@ -90,6 +90,15 @@ export function WhyAusland() {
             </li>
           ))}
         </ul>
+
+        <p className="mt-8 text-center">
+          <a
+            href="/nosotros"
+            className="text-sm font-semibold text-navy transition hover:text-sky focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+          >
+            Conocé más sobre Ausland Aventuras →
+          </a>
+        </p>
       </div>
     </section>
   );

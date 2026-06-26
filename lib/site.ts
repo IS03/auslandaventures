@@ -5,6 +5,6 @@ export const site = {
   description:
     "Agencia de viajes desde Córdoba, Argentina. Viajes nacionales, internacionales y salidas regionales. Consultá fechas y disponibilidad por WhatsApp.",
   locale: "es_AR",
-  /** Definir en Vercel: NEXT_PUBLIC_SITE_URL=https://tudominio.com */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://auslandaventuras.com",
+  /** Definir en Vercel: NEXT_PUBLIC_SITE_URL=https://www.auslandaventuras.com */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.auslandaventuras.com",
 } as const;

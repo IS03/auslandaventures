@@ -11,14 +11,15 @@ import { WhatsAppButton } from "./whatsapp-button";
 const navLinks = [
   { href: "#destacados", label: "Destacados" },
   { href: "#viajes", label: "Viajes" },
-  { href: "#nosotros", label: "Nosotros" },
+  { href: "/nosotros", label: "Nosotros" },
   { href: "#experiencias", label: "Experiencias" },
   { href: "#contacto", label: "Contacto" },
 ] as const;
 
 /** En la home usa ancla local; en subpáginas vuelve al inicio y a la sección. */
-function resolveNavHref(pathname: string, hash: string): string {
-  return pathname === "/" ? hash : `/${hash}`;
+function resolveNavHref(pathname: string, href: string): string {
+  if (href.startsWith("/")) return href;
+  return pathname === "/" ? href : `/${href}`;
 }
 
 const navLinkClass = (overLightBg: boolean) =>
