@@ -108,7 +108,10 @@ export default async function CategoryPage({ params }: PageProps) {
       <JsonLd data={jsonLd} />
       <SiteHeader />
       <main id="contenido" tabIndex={-1} className="outline-none max-lg:pb-4 lg:pb-0">
-        <section className="relative min-h-[min(40vh,22rem)] overflow-hidden bg-navy-deep text-white">
+        <section
+          id="hero"
+          className="relative min-h-[min(48vh,26rem)] overflow-hidden bg-navy-deep text-white"
+        >
           <Image
             src={heroImage}
             alt=""
@@ -122,7 +125,7 @@ export default async function CategoryPage({ params }: PageProps) {
             className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/75 to-navy-deep/40"
             aria-hidden
           />
-          <div className="container-page relative flex min-h-[min(40vh,22rem)] flex-col justify-end pb-10 pt-28 sm:pb-12 sm:pt-32">
+          <div className="container-page relative flex min-h-[min(48vh,26rem)] flex-col justify-end pb-10 pt-28 sm:pb-12 sm:pt-32">
             <p className="text-xs font-bold uppercase tracking-widest text-sky-light">
               {categoryLabel(page.category)}
             </p>

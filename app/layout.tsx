@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { DM_Serif_Display, Nunito } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
 import { SkipToContent } from "@/components/skip-to-content";
@@ -15,7 +16,7 @@ const display = DM_Serif_Display({
 
 const sans = Nunito({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
@@ -82,6 +83,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={[travelAgencyJsonLd(), webSiteJsonLd()]} />
         <SkipToContent />
         {children}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        ) : null}
       </body>
     </html>
   );
