@@ -1,3 +1,5 @@
+"use client";
+
 import { sendGAEvent } from "@next/third-parties/google";
 
 export type WhatsAppClickLocation =
@@ -13,8 +15,16 @@ export function trackWhatsAppClick(
   location: WhatsAppClickLocation,
   destination?: string,
 ) {
-  sendGAEvent("event", "whatsapp_click", {
+  const params = {
     location,
+    transport_type: "beacon",
     ...(destination ? { destination } : {}),
-  });
+  };
+
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "whatsapp_click", params);
+    return;
+  }
+
+  sendGAEvent("event", "whatsapp_click", params);
 }
