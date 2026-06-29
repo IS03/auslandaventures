@@ -204,6 +204,8 @@ export function DestinationCard({
                 : "w-full"
             }
             ariaLabel={`Consultar viaje a ${title} por WhatsApp`}
+            analyticsLocation="card"
+            destination={slug}
           >
             <span className={compact ? "max-sm:hidden" : ""}>Consultar por WhatsApp</span>
             {compact ? <span className="sm:hidden">WhatsApp</span> : null}

@@ -167,6 +167,7 @@ export default function AboutPage() {
                 variant="primary"
                 size="lg"
                 className="mt-6 inline-flex w-full justify-center sm:w-auto"
+                analyticsLocation="nosotros"
               >
                 Consultar por WhatsApp
               </WhatsAppButton>

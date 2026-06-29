@@ -1,3 +1,6 @@
+"use client";
+
+import { trackWhatsAppClick, type WhatsAppClickLocation } from "@/lib/analytics";
 import { whatsappUrl } from "@/src/data/contact";
 
 type WhatsAppButtonProps = {
@@ -7,6 +10,8 @@ type WhatsAppButtonProps = {
   variant?: "primary" | "outline" | "ghost" | "card";
   size?: "sm" | "md" | "lg";
   ariaLabel?: string;
+  analyticsLocation?: WhatsAppClickLocation;
+  destination?: string;
 };
 
 const variants = {
@@ -32,6 +37,8 @@ export function WhatsAppButton({
   variant = "primary",
   size = "md",
   ariaLabel,
+  analyticsLocation,
+  destination,
 }: WhatsAppButtonProps) {
   return (
     <a
@@ -40,6 +47,11 @@ export function WhatsAppButton({
       rel="noopener noreferrer"
       aria-label={ariaLabel ?? String(children)}
       className={`inline-flex items-center justify-center rounded-full font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] ${variants[variant]} ${sizes[size]} ${className}`}
+      onClick={() => {
+        if (analyticsLocation) {
+          trackWhatsAppClick(analyticsLocation, destination);
+        }
+      }}
     >
       <WhatsAppIcon />
       <span>{children}</span>

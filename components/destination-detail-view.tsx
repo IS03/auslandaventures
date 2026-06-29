@@ -40,6 +40,8 @@ export function DestinationDetailView({ destination, plans }: DestinationDetailV
                 variant="card"
                 className="mt-6 inline-flex"
                 ariaLabel={`Consultar viaje a ${title} por WhatsApp`}
+                analyticsLocation="detail"
+                destination={slug}
               >
                 Consultar por WhatsApp
               </WhatsAppButton>
@@ -79,6 +81,8 @@ export function DestinationDetailView({ destination, plans }: DestinationDetailV
                   size="lg"
                   className="mt-6 inline-flex"
                   ariaLabel={`Consultar viaje a ${title} por WhatsApp`}
+                  analyticsLocation="detail"
+                  destination={slug}
                 >
                   Consultar por WhatsApp
                 </WhatsAppButton>

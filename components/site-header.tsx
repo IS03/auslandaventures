@@ -182,6 +182,7 @@ export function SiteHeader() {
               message={defaultWhatsappMessage}
               variant={overLightBg ? "primary" : "outline"}
               size="sm"
+              analyticsLocation="header"
             >
               Consultar
             </WhatsAppButton>

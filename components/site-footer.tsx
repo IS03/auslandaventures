@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { contact, defaultWhatsappMessage, whatsappUrl } from "@/src/data/contact";
+import { FooterWhatsAppLink } from "@/components/footer-whatsapp-link";
+import { contact } from "@/src/data/contact";
 
 const footerLink =
   "rounded-md text-white/80 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-light";
@@ -32,14 +33,9 @@ export function SiteFooter() {
             <h3 className="text-xs font-bold uppercase tracking-widest text-sky-light">Contacto</h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
-                <a
-                  href={whatsappUrl(defaultWhatsappMessage)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <FooterWhatsAppLink
                   className={`font-semibold text-white hover:text-amber ${footerLink}`}
-                >
-                  WhatsApp {contact.whatsapp.primary.display}
-                </a>
+                />
               </li>
               <li>
                 <a

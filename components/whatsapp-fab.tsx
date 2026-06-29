@@ -1,5 +1,6 @@
 "use client";
 
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { defaultWhatsappMessage, whatsappUrl } from "@/src/data/contact";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -47,6 +48,7 @@ export function WhatsAppFab() {
         bottom: "max(1.25rem, env(safe-area-inset-bottom, 0px))",
       }}
       aria-label="Consultar por WhatsApp"
+      onClick={() => trackWhatsAppClick("fab")}
       {...(!revealed ? { "aria-hidden": true as const, tabIndex: -1 as const } : {})}
     >
       <span
