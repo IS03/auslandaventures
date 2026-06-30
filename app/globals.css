@@ -40,6 +40,10 @@
     @apply bg-sage font-sans text-navy-deep antialiased;
   }
 
+  .font-display {
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
   :focus {
     outline: none;
   }

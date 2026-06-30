@@ -63,7 +63,7 @@ export function DestinationHero({
             <p className="text-xs font-bold uppercase tracking-widest text-sky-light">
               {category} · {type}
             </p>
-            <h1 className="mt-2 font-display text-3xl leading-tight sm:text-4xl lg:text-5xl">
+            <h1 className="mt-2 font-display text-3xl font-semibold leading-[1.1] tracking-[-0.01em] sm:text-4xl sm:leading-[1.08] lg:text-5xl">
               {title}
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-white/85 sm:text-base">

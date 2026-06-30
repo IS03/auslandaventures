@@ -12,7 +12,7 @@ export function DestinationGrid({ destinations }: DestinationGridProps) {
         className="rounded-3xl border-2 border-dashed border-navy/15 bg-white px-6 py-14 text-center shadow-card ring-1 ring-navy/10 sm:py-16"
         role="status"
       >
-        <p className="font-display text-xl text-navy sm:text-2xl">
+        <p className="font-sans text-lg font-semibold text-navy sm:text-xl">
           No hay destinos con esos filtros
         </p>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-navy-deep/65">

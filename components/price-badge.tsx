@@ -42,7 +42,7 @@ export function PriceBadge({
           <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.14em] text-navy-deep/45 sm:text-[11px]">
             Desde
           </span>
-          <span className="font-display text-base font-bold leading-none tabular-nums tracking-tight text-navy sm:text-xl">
+          <span className="font-sans text-base font-bold leading-none tabular-nums tracking-tight text-navy sm:text-xl">
             {formatted}
           </span>
         </span>
@@ -64,7 +64,7 @@ export function PriceBadge({
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-sky-light/90">
           Desde
         </p>
-        <p className="mt-0.5 font-display text-2xl font-bold tabular-nums text-white sm:text-3xl">
+        <p className="mt-0.5 font-sans text-2xl font-bold tabular-nums text-white sm:text-3xl">
           {formatted}
         </p>
       </div>

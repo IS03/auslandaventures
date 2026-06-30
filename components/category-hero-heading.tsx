@@ -18,7 +18,7 @@ export function CategoryHeroHeading({ heading }: CategoryHeroHeadingProps) {
       ref={ref}
       className={`scroll-reveal mt-2 max-w-2xl ${isVisible ? "is-visible" : ""}`}
     >
-      <h1 className="font-display text-3xl leading-tight sm:text-4xl lg:text-5xl">
+      <h1 className="font-display text-3xl font-semibold leading-[1.1] tracking-[-0.01em] sm:text-4xl sm:leading-[1.08] lg:text-5xl">
         <HighlightedTitle
           as="span"
           text={heading}

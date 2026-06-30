@@ -71,7 +71,7 @@ export function DestinationDetailView({ destination, plans }: DestinationDetailV
               </div>
 
               <div className="mt-10 rounded-3xl bg-navy p-6 text-center text-white shadow-card sm:p-8">
-                <p className="font-display text-xl sm:text-2xl">¿Te interesa este viaje?</p>
+                <p className="font-sans text-lg font-semibold sm:text-xl">¿Te interesa este viaje?</p>
                 <p className="mt-2 text-sm text-white/75">
                   Escribinos por WhatsApp con tu cantidad de personas y fechas preferidas.
                 </p>

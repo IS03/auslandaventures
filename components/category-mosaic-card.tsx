@@ -56,7 +56,7 @@ export function CategoryMosaicCard({
         aria-hidden
       />
       <div className="category-card-reveal__content absolute inset-0 flex flex-col justify-end p-5 sm:p-7 lg:p-8">
-        <h2 className="font-display text-2xl font-bold tracking-tight text-white drop-shadow-sm sm:text-3xl lg:text-[2rem]">
+        <h2 className="font-display text-2xl font-semibold leading-[1.12] tracking-[-0.01em] text-white drop-shadow-sm sm:text-3xl lg:text-[2rem]">
           {title}
         </h2>
         <span

@@ -102,7 +102,7 @@ export function SiteHeader() {
               <li key={link.href} className="mobile-nav-item w-full">
                 <Link
                   href={resolveNavHref(pathname, link.href)}
-                  className="mobile-nav-link block py-5 font-display text-3xl font-semibold leading-tight text-navy transition-colors hover:text-sky focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky active:text-sky sm:py-6"
+                  className="mobile-nav-link block py-5 font-sans text-2xl font-semibold leading-tight text-navy transition-colors hover:text-sky focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky active:text-sky sm:py-6 sm:text-3xl"
                   onClick={closeMenu}
                   tabIndex={menuOpen ? 0 : -1}
                 >

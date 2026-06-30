@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { DM_Serif_Display, Nunito } from "next/font/google";
+import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
 import { SkipToContent } from "@/components/skip-to-content";
 import { GA_MEASUREMENT_ID, isAnalyticsEnabled } from "@/lib/gtag-id";
@@ -8,16 +8,16 @@ import { travelAgencyJsonLd, webSiteJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = DM_Serif_Display({
+const display = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   variable: "--font-display",
   display: "swap",
 });
 
-const sans = Nunito({
+const sans = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
