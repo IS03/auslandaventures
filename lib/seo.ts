@@ -6,6 +6,7 @@ import {
 } from "@/src/data/destinations";
 import type { TravelPlan } from "@/src/data/plan-types";
 import { contact, whatsappUrl } from "@/src/data/contact";
+import { travelAgencyRegistry } from "@/src/data/politicas";
 import { site } from "@/lib/site";
 
 /** URL absoluta para metadata, sitemap y JSON-LD. */
@@ -65,6 +66,7 @@ export function travelAgencyJsonLd() {
     image: absoluteUrl("/hero/hero.jpg"),
     telephone: contact.whatsapp.primary.display,
     email: contact.email,
+    identifier: `RNAV Legajo ${travelAgencyRegistry.legajo}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Córdoba",

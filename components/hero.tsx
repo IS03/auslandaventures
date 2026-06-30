@@ -42,13 +42,17 @@ export function Hero() {
                 Córdoba, Argentina
               </p>
 
-              <h1 className="animate-in-delay-1 hero-text-shadow max-w-[14ch] font-display text-[2rem] font-semibold leading-[1.08] text-white sm:max-w-3xl sm:text-5xl lg:text-6xl text-balance">
-                La aventura de conocer un nuevo destino
+              <h1 className="animate-in-delay-1 hero-text-shadow max-w-[18ch] font-display text-[2rem] font-semibold leading-[1.08] text-white sm:max-w-3xl sm:text-5xl lg:text-6xl text-balance">
+                Agencia de viajes en Córdoba
               </h1>
 
-              <p className="animate-in-delay-2 hero-text-shadow mt-4 max-w-lg text-[0.95rem] leading-relaxed text-white/90 sm:mt-5 sm:max-w-xl sm:text-lg">
-                Viajes nacionales, internacionales y salidas regionales desde Córdoba. Explorá el
-                catálogo y encontrá tu próxima salida.
+              <p className="animate-in-delay-2 hero-text-shadow mt-3 max-w-xl font-display text-lg font-semibold leading-snug text-white/95 sm:mt-4 sm:text-2xl lg:text-3xl text-balance">
+                La aventura de conocer un nuevo destino
+              </p>
+
+              <p className="animate-in-delay-3 hero-text-shadow mt-4 max-w-lg text-[0.95rem] leading-relaxed text-white/90 sm:mt-5 sm:max-w-xl sm:text-lg">
+                Viajes nacionales, internacionales y salidas regionales. Explorá el catálogo y
+                encontrá tu próxima salida.
               </p>
 
               <a

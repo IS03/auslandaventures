@@ -150,8 +150,8 @@ const destinationList: DestinationInput[] = [
     type: "Aéreo",
     description: "Playa, sol y all inclusive en uno de los destinos más buscados del Caribe mexicano.",
     priceFrom: null,
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/mexico-cancun.png",
+    hasPhoto: true,
     featured: true,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Cancún. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
@@ -163,8 +163,8 @@ const destinationList: DestinationInput[] = [
     type: "Aéreo",
     description: "Riviera Maya, playas y resorts para una escapada completa al Caribe mexicano.",
     priceFrom: null,
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/mexico-playa-del-carmen.png",
+    hasPhoto: true,
     featured: false,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Playa del Carmen. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
@@ -177,8 +177,8 @@ const destinationList: DestinationInput[] = [
     description: "República Dominicana: playas de ensueño y resorts all inclusive en el corazón del Caribe.",
     priceFrom: 2050,
     priceCurrency: "USD",
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/punta-cana.png",
+    hasPhoto: true,
     featured: true,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Punta Cana. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",
@@ -204,8 +204,8 @@ const destinationList: DestinationInput[] = [
     description: "Aguas turquesas y estadías en estudios equipados con opciones para todos los presupuestos.",
     priceFrom: 1390,
     priceCurrency: "USD",
-    image: destinationImageFallback,
-    hasPhoto: false,
+    image: "/destinos/aruba.png",
+    hasPhoto: true,
     featured: false,
     whatsappMessage:
       "Hola, quiero consultar por el viaje a Aruba. Somos [CANTIDAD] personas y queremos saber fechas, hotel y precio.",

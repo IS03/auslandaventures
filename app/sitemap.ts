@@ -31,6 +31,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: absoluteUrl("/politicas"),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
     ...categoryUrls,
     ...destinationUrls,
   ];

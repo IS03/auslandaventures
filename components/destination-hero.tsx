@@ -1,10 +1,9 @@
 import Image from "next/image";
-import type { Destination } from "@/src/data/destinations";
-import {
-  categoryPlaceholderImage,
-  destinationImageFallback,
-} from "@/src/data/destinations";
+import type { Destination, DestinationCategory } from "@/src/data/destinations";
+import { destinationImageFallback } from "@/src/data/destinations";
 import type { PlanCurrency } from "@/src/data/plan-types";
+import { getFlyerImagesForDestination } from "@/src/data/travel-plans";
+import { FlyerLightboxTrigger } from "./flyer-lightbox-trigger";
 import { PriceBadge } from "./price-badge";
 
 type DestinationHeroProps = {
@@ -13,56 +12,53 @@ type DestinationHeroProps = {
   priceCurrency: PlanCurrency;
 };
 
+const categoryHeroSurface: Record<DestinationCategory, string> = {
+  Nacionales:
+    "bg-gradient-to-br from-navy-deep via-navy to-sky/90",
+  Internacionales:
+    "bg-gradient-to-br from-navy-deep via-[#123a6b] to-turquoise/75",
+  "Regionales / Full Day":
+    "bg-gradient-to-br from-navy-deep via-navy to-amber/55",
+};
+
 export function DestinationHero({
   destination,
   priceFrom,
   priceCurrency,
 }: DestinationHeroProps) {
-  const { title, category, type, description, hasPhoto, image } = destination;
-  const bannerSrc = hasPhoto ? image : categoryPlaceholderImage[category];
-  const bannerClass = hasPhoto
-    ? "object-cover object-[center_22%]"
-    : "object-cover object-center";
-
-  const bannerAlt = `Viaje a ${title} desde Córdoba — ${category}`;
+  const { title, category, type, description, hasPhoto, image, slug } = destination;
+  const flyerImages = getFlyerImagesForDestination(slug, hasPhoto ? image : undefined);
 
   return (
     <section
       id="hero"
-      className="relative min-h-[min(48vh,26rem)] overflow-hidden bg-navy-deep text-white"
+      className={`relative min-h-[min(48vh,26rem)] overflow-hidden text-white ${categoryHeroSurface[category]}`}
     >
-      <Image
-        src={bannerSrc}
-        alt={bannerAlt}
-        fill
-        priority
-        sizes="100vw"
-        className={bannerClass}
-      />
-
       <div
-        className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/80 to-navy-deep/45"
+        className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-white/10 blur-2xl"
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-navy-deep/70 via-transparent to-navy-deep/30"
+        className="pointer-events-none absolute -bottom-24 -left-12 h-64 w-64 rounded-full bg-sky-light/15 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep/50 via-transparent to-navy-deep/20"
         aria-hidden
       />
 
-      {!hasPhoto && (
-        <div
-          className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden pr-[8%] opacity-[0.07]"
-          aria-hidden
-        >
-          <Image
-            src={destinationImageFallback}
-            alt=""
-            width={280}
-            height={80}
-            className="brightness-0 invert"
-          />
-        </div>
-      )}
+      <div
+        className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden pr-[6%] opacity-[0.06]"
+        aria-hidden
+      >
+        <Image
+          src={destinationImageFallback}
+          alt=""
+          width={320}
+          height={90}
+          className="brightness-0 invert"
+        />
+      </div>
 
       <div className="container-page relative flex min-h-[min(48vh,26rem)] flex-col justify-end pb-10 pt-28 sm:pb-14 sm:pt-32">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -76,6 +72,11 @@ export function DestinationHero({
             <p className="mt-3 text-sm leading-relaxed text-white/85 sm:text-base">
               {description}
             </p>
+            {flyerImages.length > 0 && (
+              <div className="mt-5">
+                <FlyerLightboxTrigger images={flyerImages} title={title} />
+              </div>
+            )}
           </div>
 
           <PriceBadge

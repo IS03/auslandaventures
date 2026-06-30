@@ -18,12 +18,15 @@ type DestinationCardProps = {
   onDarkSection?: boolean;
   /** Catálogo en grilla: más chico en celular (2 columnas + proporciones ajustadas). */
   compact?: boolean;
+  /** Destacados: recortar flyer vertical (4:5) también en móvil. */
+  cropFlyer?: boolean;
 };
 
 export function DestinationCard({
   destination,
   onDarkSection = false,
   compact = false,
+  cropFlyer = false,
 }: DestinationCardProps) {
   const { title, category, type, description, image, hasPhoto, hasTravelPlan, whatsappMessage, slug } =
     destination;
@@ -34,14 +37,20 @@ export function DestinationCard({
 
   const imageAlt = hasPhoto ? `Flyer del viaje a ${title}, categoría ${category}` : "";
 
-  /** Móvil con foto: flyer a altura natural. Sin foto: marco 4:5 (más bajo que 9:16). Desktop: crop 4:5. */
-  const imageFrameClass = hasPhoto
-    ? compact
-      ? "relative w-full max-sm:leading-[0] sm:aspect-[4/5]"
-      : "relative w-full max-sm:leading-[0] sm:aspect-[4/5]"
-    : compact
-      ? "relative w-full max-sm:aspect-[4/5] max-sm:overflow-hidden sm:aspect-[4/5]"
-      : "relative w-full max-sm:aspect-[4/5] max-sm:overflow-hidden sm:aspect-[4/5]";
+  /** Flyers 9:16 — en destacados o grilla compacta se recortan a 4:5; en catálogo móvil pueden verse enteros. */
+  const cropPhoto = hasPhoto && (cropFlyer || compact);
+
+  const imageFrameClass = cropPhoto
+    ? "relative w-full aspect-[4/5] overflow-hidden"
+    : hasPhoto
+      ? "relative w-full max-sm:leading-[0] sm:aspect-[4/5] sm:overflow-hidden"
+      : compact
+        ? "relative w-full max-sm:aspect-[4/5] max-sm:overflow-hidden sm:aspect-[4/5]"
+        : "relative w-full max-sm:aspect-[4/5] max-sm:overflow-hidden sm:aspect-[4/5]";
+
+  const photoImageClass = cropPhoto
+    ? "absolute inset-0 h-full w-full object-cover object-[center_22%] transition-transform duration-500 group-hover/image:scale-[1.03]"
+    : "block h-auto w-full sm:absolute sm:inset-0 sm:h-full sm:w-full sm:object-cover sm:object-[center_22%] sm:transition-transform sm:duration-500 sm:group-hover/image:scale-[1.03]";
 
   const placeholderSrc = categoryPlaceholderImage[category];
 
@@ -59,7 +68,7 @@ export function DestinationCard({
               ? "(max-width: 640px) 46vw, (max-width: 1024px) 45vw, 320px"
               : "(max-width: 640px) 88vw, (max-width: 1024px) 45vw, 320px"
           }
-          className="block h-auto w-full sm:absolute sm:inset-0 sm:h-full sm:w-full sm:object-cover sm:object-[center_22%] sm:transition-transform sm:duration-500 sm:group-hover/image:scale-[1.03]"
+          className={photoImageClass}
         />
       ) : (
         <>
