@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
-import { SectionHeading } from "./section-heading";
+import { SplitEditorialHeading } from "./split-editorial-heading";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { howWeWorkSteps } from "@/src/data/home-sections";
 
@@ -60,13 +60,15 @@ export function HowWeWork() {
         className={`how-we-work-reveal container-page ${isVisible ? "is-visible" : ""}`}
       >
         <div className="how-we-work-heading">
-          <SectionHeading
+          <SplitEditorialHeading
             eyebrow="Simple y rápido"
-            title="¿Cómo trabajamos?"
-            titleHighlight="trabajamos"
+            line1="Elegí el destino,"
+            line2="nosotros te acompañamos."
             subtitle="En 3 pasos tenés tu viaje consultado y listo para reservar."
             align="center"
+            accent="sky"
             titleId="como-trabajamos-heading"
+            className="lg:max-w-[30rem]"
           />
         </div>
 

@@ -25,10 +25,8 @@ export function TravelerStories() {
       >
         <SectionHeading
           eyebrow="Comunidad"
-          title="Experiencias de viajeros"
-          titleHighlight="viajeros"
-          animateUnderline
-          subtitle="Seguinos en Instagram y contanos tu viaje cuando vuelvas."
+          title="Experiencias que también se comparten"
+          subtitle="Conocé viajes, momentos y recomendaciones reales de nuestra comunidad."
           align="center"
           titleId="experiencias-heading"
         />

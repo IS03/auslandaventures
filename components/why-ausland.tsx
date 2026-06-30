@@ -1,7 +1,7 @@
 "use client";
 
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import { SectionHeading } from "./section-heading";
+import { SplitEditorialHeading } from "./split-editorial-heading";
 
 const pillars = [
   {
@@ -71,13 +71,13 @@ export function WhyAusland() {
         ref={ref}
         className={`scroll-reveal container-page ${isVisible ? "is-visible" : ""}`}
       >
-        <SectionHeading
+        <SplitEditorialHeading
           eyebrow="Confianza"
-          title="Por qué elegir Ausland Aventuras"
-          titleHighlight="Ausland Aventuras"
-          animateUnderline
+          line1="Viajes desde Córdoba,"
+          line2="para viajar tranquilo."
           subtitle="Una forma simple de descubrir viajes y resolver tu consulta directo con nosotros."
           align="center"
+          accent="amber"
         />
 
         <ul className="mt-10 grid list-none gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6">
