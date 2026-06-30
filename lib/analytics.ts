@@ -1,6 +1,7 @@
 "use client";
 
 import { sendGAEvent } from "@next/third-parties/google";
+import { isAnalyticsEnabled } from "@/lib/gtag-id";
 
 export type WhatsAppClickLocation =
   | "header"
@@ -8,18 +9,18 @@ export type WhatsAppClickLocation =
   | "footer"
   | "card"
   | "detail"
-  | "nosotros";
+  | "nosotros"
+  | "experiencias";
 
 /** Evento de conversión: clic en enlace o botón de WhatsApp. */
 export function trackWhatsAppClick(
   location: WhatsAppClickLocation,
   destination?: string,
 ) {
-  const params = {
-    location,
-    transport_type: "beacon",
-    ...(destination ? { destination } : {}),
-  };
+  if (!isAnalyticsEnabled) return;
+
+  const params: Record<string, string> = { location };
+  if (destination) params.destination = destination;
 
   if (typeof window !== "undefined" && typeof window.gtag === "function") {
     window.gtag("event", "whatsapp_click", params);

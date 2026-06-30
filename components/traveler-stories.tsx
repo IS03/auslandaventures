@@ -1,24 +1,25 @@
+import Link from "next/link";
+import { contact, travelerStoryWhatsappMessage } from "@/src/data/contact";
 import { SectionHeading } from "./section-heading";
+import { WhatsAppButton } from "./whatsapp-button";
 
 export function TravelerStories() {
   return (
     <section
       id="experiencias"
       className="section-padding section-surface-a section-surface-a--pre-footer overflow-x-hidden"
+      aria-labelledby="experiencias-heading"
     >
       <div className="container-page">
         <SectionHeading
           eyebrow="Comunidad"
           title="Experiencias de viajeros"
-          subtitle="Historias y opiniones de quienes viajan con nosotros."
+          subtitle="Tu opinión ayuda a otros a elegir su próximo destino."
           align="center"
+          titleId="experiencias-heading"
         />
 
-        <div
-          className="relative mx-auto mt-10 max-w-2xl overflow-hidden rounded-3xl bg-white p-8 text-center ring-1 ring-navy/8 sm:mt-12 sm:p-12"
-          role="status"
-          aria-live="polite"
-        >
+        <div className="relative mx-auto mt-10 max-w-2xl overflow-hidden rounded-3xl bg-white p-8 text-center ring-1 ring-navy/8 sm:mt-12 sm:p-12">
           <div
             className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-sky/10"
             aria-hidden
@@ -46,21 +47,37 @@ export function TravelerStories() {
           </div>
 
           <p className="relative font-display text-xl font-semibold text-navy sm:text-2xl text-balance">
-            Muy pronto vamos a compartir experiencias reales de quienes viajen con Ausland Aventuras.
+            ¿Ya viajaste con Ausland Aventuras?
           </p>
 
           <p className="relative mx-auto mt-4 max-w-md text-sm leading-relaxed text-navy-deep/65 sm:text-base">
-            Cuando tengamos reseñas de viajeros, las publicamos acá. Mientras tanto, escribinos y
-            contanos qué destino te interesa.
+            Contanos cómo fue tu viaje por WhatsApp. Con tu permiso, publicamos tu historia acá para
+            que más personas se animen a conocer un nuevo destino.
           </p>
 
-          <ul
-            className="relative mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 border-t border-navy/8 pt-8 text-xs font-semibold uppercase tracking-wide text-navy/40"
-            aria-hidden
-          >
-            <li className="text-navy/25">·</li>
-            <li>Próximamente</li>
-          </ul>
+          <div className="relative mt-8 flex flex-col items-center gap-4">
+            <WhatsAppButton
+              message={travelerStoryWhatsappMessage}
+              size="lg"
+              variant="primary"
+              ariaLabel="Compartir mi experiencia de viaje por WhatsApp"
+              analyticsLocation="experiencias"
+            >
+              Compartir mi experiencia
+            </WhatsAppButton>
+
+            <p className="text-xs text-navy-deep/50 sm:text-sm">
+              También podés seguirnos en{" "}
+              <Link
+                href={contact.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-sky underline decoration-sky/30 underline-offset-2 transition hover:text-navy hover:decoration-sky/60"
+              >
+                @{contact.instagram.handle}
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </section>

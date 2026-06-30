@@ -3,6 +3,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { DM_Serif_Display, Nunito } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
 import { SkipToContent } from "@/components/skip-to-content";
+import { GA_MEASUREMENT_ID, isAnalyticsEnabled } from "@/lib/gtag-id";
 import { travelAgencyJsonLd, webSiteJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -83,9 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={[travelAgencyJsonLd(), webSiteJsonLd()]} />
         <SkipToContent />
         {children}
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-        ) : null}
+        {isAnalyticsEnabled ? <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> : null}
       </body>
     </html>
   );

@@ -4,6 +4,8 @@ type SectionHeadingProps = {
   subtitle?: string;
   align?: "left" | "center";
   light?: boolean;
+  /** id del h2 para aria-labelledby en secciones */
+  titleId?: string;
 };
 
 export function SectionHeading({
@@ -12,6 +14,7 @@ export function SectionHeading({
   subtitle,
   align = "left",
   light = false,
+  titleId,
 }: SectionHeadingProps) {
   const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
 
@@ -27,6 +30,7 @@ export function SectionHeading({
         </p>
       )}
       <h2
+        id={titleId}
         className={`font-display text-[1.75rem] font-semibold leading-[1.12] sm:text-4xl ${
           light ? "text-white" : "text-navy"
         } text-balance`}

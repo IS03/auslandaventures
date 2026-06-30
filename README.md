@@ -46,6 +46,13 @@ npm run dev
 
 Abrí [http://localhost:3000](http://localhost:3000).
 
+## Analytics (GA4)
+
+- ID de medición: `G-0C6V3MFHHE` (activo en producción).
+- Variable: `NEXT_PUBLIC_GA_MEASUREMENT_ID` en Vercel y `.env.local`.
+- Evento de conversión: `whatsapp_click` (ubicación + destino opcional).
+- Guía completa: `docs/analytics.md`.
+
 ## Scripts
 
 | Comando | Descripción |

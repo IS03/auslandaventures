@@ -22,6 +22,10 @@ export const contact = {
 export const defaultWhatsappMessage =
   "Hola, quiero consultar por un viaje con Ausland Aventuras. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.";
 
+/** Mensaje para viajeros que quieren compartir su experiencia (sección Comunidad). */
+export const travelerStoryWhatsappMessage =
+  "Hola, viajé con Ausland Aventuras y me gustaría compartir mi experiencia. Mi viaje fue a [DESTINO] y [CONTÁ TU EXPERIENCIA EN POCAS LÍNEAS].";
+
 /** Plantilla para mensajes por destino (usada en destinations.ts). */
 export function buildDestinationWhatsappMessage(destinationName: string): string {
   return `Hola, quiero consultar por el viaje a ${destinationName}. Somos [CANTIDAD] personas y queremos saber fechas, precio y disponibilidad.`;

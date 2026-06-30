@@ -12,7 +12,6 @@ const navLinks = [
   { href: "#destacados", label: "Destacados" },
   { href: "#viajes", label: "Viajes" },
   { href: "/nosotros", label: "Nosotros" },
-  { href: "#experiencias", label: "Experiencias" },
   { href: "#contacto", label: "Contacto" },
 ] as const;
 
