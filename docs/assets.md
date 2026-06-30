@@ -36,9 +36,22 @@
 
 Destinos sin archivo aquí → ver `destinationImageFallback` en `src/data/destinations.ts`.
 
-## `public/marketing/` — Copia de respaldo (mismos flyers)
+## `public/marketing/` — Variantes históricas
 
-Archivos originales renombrados. La web lee desde `destinos/`.
+Nombres originales de flyers. Algunos coinciden con `destinos/`; otros son versiones distintas. Referenciados en `travel-plans.ts` y `flyer-catalog.ts` como `sourceImages`. **No borrar** sin actualizar esos archivos.
+
+## `docs/contenido/` — Textos fuente (no van directo a la web)
+
+| Archivo | Uso |
+|---------|-----|
+| `informacion-destinos.md` | Info de paquetes → alimenta `travel-plans.ts` |
+| `politicas-borrador.md` | Borrador WhatsApp → ya estructurado en `src/data/politicas.ts` |
+
+## `docs/pendientes/` — Assets sin destino en la web
+
+| Archivo | Notas |
+|---------|-------|
+| `bariloche.png` | Flyer listo; falta crear destino en catálogo |
 
 ## Estrategia de contenido
 

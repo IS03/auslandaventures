@@ -1,6 +1,6 @@
 # Fotos y contenido — estrategia actualizada
 
-Flyers verticales (1080×1920) para Instagram/stories + **información básica** en `INFORMACIÓN BÁSICA DE DESTINOS.md` para destinos sin flyer diseñado.
+Flyers verticales (1080×1920) para Instagram/stories + **información básica** en `docs/contenido/informacion-destinos.md` para destinos sin flyer diseñado.
 
 ## Flyers en `public/destinos/`
 

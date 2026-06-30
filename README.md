@@ -19,16 +19,19 @@ src/data/
 public/
   brand/                      # Logos
   categorias/                 # Imágenes por tipo de viaje
-  destinos/                   # Flyers verticales 1080×1920
+  destinos/                   # Flyers activos (slug.png + planes/)
+  marketing/                  # Variantes históricas (referenciadas en datos)
   hero/                       # Foto principal del home
-docs/                         # Brief, stack, assets, contenido
+docs/                         # Brief, stack, assets, textos fuente
+  contenido/                  # Info de destinos y borradores legales
+  pendientes/                 # Flyers sin destino en la web aún
 ```
 
 ## Cómo arrancar
 
 1. Leer `docs/brief-ausland.md` y `docs/stack.md`.
 2. Revisar assets en `docs/assets.md` y `docs/fotos-y-contenido.md`.
-3. Fuente de datos de negocio: `INFORMACIÓN BÁSICA DE DESTINOS.md` (raíz) → `src/data/travel-plans.ts`.
+3. Fuente de datos de negocio: `docs/contenido/informacion-destinos.md` → `src/data/travel-plans.ts`.
 
 ## Stack
 
