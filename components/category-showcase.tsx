@@ -16,14 +16,17 @@ export function CategoryShowcase() {
             block={nacionales}
             className="min-h-[280px] lg:col-span-5 lg:row-span-2 lg:min-h-0"
             priority
+            revealDelay={0}
           />
           <CategoryMosaicCard
             block={internacionales}
             className="min-h-[220px] lg:col-span-7 lg:row-start-1 lg:min-h-0"
+            revealDelay={140}
           />
           <CategoryMosaicCard
             block={regionales}
             className="min-h-[220px] lg:col-span-7 lg:row-start-2 lg:min-h-0"
+            revealDelay={280}
           />
         </div>
       </div>

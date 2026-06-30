@@ -2,8 +2,6 @@ import Image from "next/image";
 import type { Destination, DestinationCategory } from "@/src/data/destinations";
 import { destinationImageFallback } from "@/src/data/destinations";
 import type { PlanCurrency } from "@/src/data/plan-types";
-import { getFlyerImagesForDestination } from "@/src/data/travel-plans";
-import { FlyerLightboxTrigger } from "./flyer-lightbox-trigger";
 import { PriceBadge } from "./price-badge";
 
 type DestinationHeroProps = {
@@ -26,8 +24,7 @@ export function DestinationHero({
   priceFrom,
   priceCurrency,
 }: DestinationHeroProps) {
-  const { title, category, type, description, hasPhoto, image, slug } = destination;
-  const flyerImages = getFlyerImagesForDestination(slug, hasPhoto ? image : undefined);
+  const { title, category, type, description } = destination;
 
   return (
     <section
@@ -72,11 +69,6 @@ export function DestinationHero({
             <p className="mt-3 text-sm leading-relaxed text-white/85 sm:text-base">
               {description}
             </p>
-            {flyerImages.length > 0 && (
-              <div className="mt-5">
-                <FlyerLightboxTrigger images={flyerImages} title={title} />
-              </div>
-            )}
           </div>
 
           <PriceBadge

@@ -13,7 +13,9 @@ En la web usar el **principal** para CTAs globales. El secundario queda disponib
 
 ## Instagram
 
-https://instagram.com/auslandaventuras
+https://www.instagram.com/ausland.aventuras/
+
+@ausland.aventuras
 
 ## Email
 

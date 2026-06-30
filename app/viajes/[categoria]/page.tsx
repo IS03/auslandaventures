@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CategoryHeroHeading } from "@/components/category-hero-heading";
 import { DestinationGrid } from "@/components/destination-grid";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
@@ -129,9 +130,7 @@ export default async function CategoryPage({ params }: PageProps) {
             <p className="text-xs font-bold uppercase tracking-widest text-sky-light">
               {categoryLabel(page.category)}
             </p>
-            <h1 className="mt-2 max-w-2xl font-display text-3xl leading-tight sm:text-4xl lg:text-5xl">
-              {page.heading}
-            </h1>
+            <CategoryHeroHeading heading={page.heading} />
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
               {page.intro}
             </p>

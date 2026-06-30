@@ -4,8 +4,8 @@ export const contact = {
   location: "Córdoba, Argentina",
   email: "contacto@auslandaventuras.com",
   instagram: {
-    handle: "auslandaventuras",
-    url: "https://instagram.com/auslandaventuras",
+    handle: "ausland.aventuras",
+    url: "https://www.instagram.com/ausland.aventuras/",
   },
   whatsapp: {
     primary: {

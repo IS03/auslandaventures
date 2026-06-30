@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { destinationCategories, destinations } from "@/src/data/destinations";
+import { HighlightedTitle } from "./highlighted-title";
 import { HeroStats } from "./hero-stats";
 
 const HERO_ALT =
@@ -43,7 +44,12 @@ export function Hero() {
               </p>
 
               <h1 className="animate-in-delay-1 hero-text-shadow max-w-[18ch] font-display text-[2rem] font-semibold leading-[1.08] text-white sm:max-w-3xl sm:text-5xl lg:text-6xl text-balance">
-                Agencia de viajes en Córdoba
+                <HighlightedTitle
+                  as="span"
+                  text="Agencia de viajes en Córdoba"
+                  highlight="Córdoba"
+                  light
+                />
               </h1>
 
               <p className="animate-in-delay-2 hero-text-shadow mt-3 max-w-xl font-display text-lg font-semibold leading-snug text-white/95 sm:mt-4 sm:text-2xl lg:text-3xl text-balance">

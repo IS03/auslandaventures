@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import {
   categoryShowcaseBlocks,
   hrefForCategoryPage,
@@ -18,18 +21,27 @@ export function CategoryMosaicCard({
   block,
   className,
   priority = false,
+  revealDelay = 0,
 }: {
   block: CategoryBlock;
   className?: string;
   priority?: boolean;
+  /** Retraso extra al revelar (ms) — escalonado en desktop. */
+  revealDelay?: number;
 }) {
   const title = displayTitle[block.category];
   const href = hrefForCategoryPage(block.category);
+  const { ref, isVisible } = useScrollReveal<HTMLAnchorElement>({
+    threshold: 0.12,
+    rootMargin: "0px 0px -4% 0px",
+  });
 
   return (
     <Link
+      ref={ref}
       href={href}
-      className={`group relative isolate overflow-hidden rounded-2xl ring-1 ring-navy/10 transition-transform duration-300 hover:-translate-y-0.5 hover:ring-sky/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky sm:rounded-3xl ${className ?? ""}`}
+      style={{ transitionDelay: isVisible ? `${revealDelay}ms` : undefined }}
+      className={`category-card-reveal group relative isolate overflow-hidden rounded-2xl ring-1 ring-navy/10 transition-transform duration-300 hover:-translate-y-0.5 hover:ring-sky/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky sm:rounded-3xl ${isVisible ? "is-visible" : ""} ${className ?? ""}`}
     >
       <Image
         src={block.image}
@@ -37,13 +49,13 @@ export function CategoryMosaicCard({
         fill
         priority={priority}
         sizes="(max-width: 1024px) 100vw, 58vw"
-        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+        className="category-card-reveal__image object-cover object-center group-hover:scale-[1.04]"
       />
       <div
         className="absolute inset-0 bg-gradient-to-t from-navy-deep/95 via-navy-deep/45 to-navy-deep/15"
         aria-hidden
       />
-      <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-7 lg:p-8">
+      <div className="category-card-reveal__content absolute inset-0 flex flex-col justify-end p-5 sm:p-7 lg:p-8">
         <h2 className="font-display text-2xl font-bold tracking-tight text-white drop-shadow-sm sm:text-3xl lg:text-[2rem]">
           {title}
         </h2>

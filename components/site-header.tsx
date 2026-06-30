@@ -22,7 +22,7 @@ function resolveNavHref(pathname: string, href: string): string {
 }
 
 const navLinkClass = (overLightBg: boolean) =>
-  `site-nav-link rounded-lg px-1 py-0.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+  `site-nav-link rounded-lg px-2.5 py-1.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
     overLightBg ? "focus-visible:outline-sky" : "focus-visible:outline-white"
   }`;
 

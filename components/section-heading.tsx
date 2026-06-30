@@ -1,20 +1,28 @@
+import { HighlightedTitle } from "./highlighted-title";
+
 type SectionHeadingProps = {
   eyebrow?: string;
   title: string;
+  /** Palabra o frase dentro del título que lleva subrayado editorial. */
+  titleHighlight?: string;
   subtitle?: string;
   align?: "left" | "center";
   light?: boolean;
   /** id del h2 para aria-labelledby en secciones */
   titleId?: string;
+  /** Dibuja el subrayado de `titleHighlight` al entrar en vista (ancestro `.scroll-reveal`). */
+  animateUnderline?: boolean;
 };
 
 export function SectionHeading({
   eyebrow,
   title,
+  titleHighlight,
   subtitle,
   align = "left",
   light = false,
   titleId,
+  animateUnderline = false,
 }: SectionHeadingProps) {
   const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
 
@@ -35,7 +43,16 @@ export function SectionHeading({
           light ? "text-white" : "text-navy"
         } text-balance`}
       >
-        {title}
+        {titleHighlight ? (
+          <HighlightedTitle
+            text={title}
+            highlight={titleHighlight}
+            light={light}
+            drawUnderline={animateUnderline}
+          />
+        ) : (
+          title
+        )}
       </h2>
       {subtitle && (
         <p

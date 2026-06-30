@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AboutIntro } from "@/components/about-intro";
+import { AboutProposal } from "@/components/about-proposal";
+import { AboutValues } from "@/components/about-values";
 import { JsonLd } from "@/components/json-ld";
+import { HighlightedTitle } from "@/components/highlighted-title";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { WhatsAppButton } from "@/components/whatsapp-button";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { absoluteUrl, breadcrumbJsonLd, defaultOgImage } from "@/lib/seo";
 import { site } from "@/lib/site";
-import { contact, defaultWhatsappMessage } from "@/src/data/contact";
 import { hrefForCategoryPage, destinationCategories } from "@/src/data/destinations";
 
 const title = "Sobre nosotros";
@@ -36,25 +38,6 @@ export const metadata: Metadata = {
     images: [defaultOgImage],
   },
 };
-
-const values = [
-  {
-    title: "Cercanía",
-    text: "Te respondemos por WhatsApp con fechas, precios y opciones concretas. Sin formularios eternos ni call centers.",
-  },
-  {
-    title: "Coordinación en ruta",
-    text: "Acompañamiento antes y durante el viaje para que disfrutes la experiencia sin resolver todo solo.",
-  },
-  {
-    title: "Variedad de destinos",
-    text: "Nacionales, internacionales y salidas regionales pensadas para viajar desde Córdoba.",
-  },
-  {
-    title: "Información clara",
-    text: "Publicamos inclusiones, fechas y tarifas orientativas para que sepas qué estás consultando.",
-  },
-];
 
 const categoryLabels: Record<(typeof destinationCategories)[number], string> = {
   Nacionales: "Viajes nacionales",
@@ -114,7 +97,12 @@ export default function AboutPage() {
           <div className="container-page relative flex min-h-[min(48vh,26rem)] flex-col justify-end pb-10 pt-28 sm:pb-12 sm:pt-32">
             <p className="text-xs font-bold uppercase tracking-widest text-sky-light">Quiénes somos</p>
             <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-              Agencia de viajes en Córdoba
+              <HighlightedTitle
+                as="span"
+                text="Agencia de viajes en Córdoba"
+                highlight="Córdoba"
+                light
+              />
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
               {site.tagline}. Organizamos viajes nacionales, internacionales y salidas regionales con
@@ -123,76 +111,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="section-padding section-surface-a">
-          <div className="container-page grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <SectionHeading
-                eyebrow="Nuestra propuesta"
-                title="Viajes con confianza, desde Córdoba"
-                subtitle="Ausland Aventuras nació para que descubrir un nuevo destino sea fácil: mirás el catálogo, elegís tu viaje y consultás directo con nosotros."
-              />
-              <p className="mt-6 text-sm leading-relaxed text-navy-deep/75 sm:text-base">
-                Somos una agencia de viajes con base en {contact.location}. Trabajamos con salidas en
-                bus y aéreo, planes con fechas publicadas y coordinación en ruta. Muchos de nuestros
-                programas incluyen asistencia al viajero — consultá el detalle de cada destino antes
-                de reservar.
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-navy-deep/75 sm:text-base">
-                En esta web encontrás destinos, precios orientativos e inclusiones. Para confirmar
-                cupos, fechas y tarifas finales, escribinos por WhatsApp con la cantidad de personas y
-                el viaje que te interesa.
-              </p>
-            </div>
+        <section className="section-padding section-surface-warm">
+          <AboutIntro />
+        </section>
 
-            <div className="rounded-3xl bg-white p-6 shadow-card ring-1 ring-navy/8 sm:p-8">
-              <h2 className="font-display text-xl text-navy sm:text-2xl">Contacto directo</h2>
-              <ul className="mt-5 space-y-3 text-sm text-navy-deep/80">
-                <li>
-                  <span className="font-semibold text-navy">WhatsApp:</span>{" "}
-                  {contact.whatsapp.primary.display}
-                </li>
-                <li>
-                  <span className="font-semibold text-navy">Email:</span> {contact.email}
-                </li>
-                <li>
-                  <span className="font-semibold text-navy">Instagram:</span> @
-                  {contact.instagram.handle}
-                </li>
-                <li>
-                  <span className="font-semibold text-navy">Ubicación:</span> {contact.location}
-                </li>
-              </ul>
-              <WhatsAppButton
-                message={defaultWhatsappMessage}
-                variant="primary"
-                size="lg"
-                className="mt-6 inline-flex w-full justify-center sm:w-auto"
-                analyticsLocation="nosotros"
-              >
-                Consultar por WhatsApp
-              </WhatsAppButton>
-            </div>
-          </div>
+        <section className="section-padding section-surface-a">
+          <AboutProposal />
         </section>
 
         <section className="section-padding section-surface-warm">
-          <div className="container-page">
-            <SectionHeading
-              eyebrow="Valores"
-              title="Por qué viajar con nosotros"
-              align="center"
-            />
-            <ul className="mt-10 grid list-none gap-5 sm:grid-cols-2 sm:gap-6">
-              {values.map((item) => (
-                <li key={item.title}>
-                  <article className="h-full rounded-3xl bg-white p-6 ring-1 ring-navy/8 sm:p-8">
-                    <h3 className="font-display text-xl font-semibold text-navy">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-navy-deep/70">{item.text}</p>
-                  </article>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <AboutValues />
         </section>
 
         <section className="section-padding section-surface-c">

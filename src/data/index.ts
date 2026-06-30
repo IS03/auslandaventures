@@ -22,7 +22,6 @@ export {
   minPriceForDestination,
   formatDeparturesShort,
   getDestinationCardMeta,
-  getFlyerImagesForDestination,
   currencyForDestination,
   type TravelPlan,
   type PlanDeparture,

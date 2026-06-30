@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { CategoryShowcase } from "@/components/category-showcase";
 import { FeaturedTrips } from "@/components/featured-trips";
 import { Hero } from "@/components/hero";
+import { HowWeWork } from "@/components/how-we-work";
+import { PaymentMethods } from "@/components/payment-methods";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { TravelerStories } from "@/components/traveler-stories";
@@ -28,10 +30,12 @@ export default function HomePage() {
         <Hero />
         <CategoryShowcase />
         <FeaturedTrips />
+        <HowWeWork />
         <Suspense fallback={<TripExplorerFallback />}>
           <TripExplorer />
         </Suspense>
         <WhyAusland />
+        <PaymentMethods />
         <TravelerStories />
       </main>
       <SiteFooter />

@@ -1,3 +1,6 @@
+"use client";
+
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { SectionHeading } from "./section-heading";
 
 const pillars = [
@@ -54,28 +57,41 @@ const pillars = [
 ];
 
 export function WhyAusland() {
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({
+    threshold: 0.15,
+    rootMargin: "0px 0px -6% 0px",
+  });
+
   return (
     <section
       id="nosotros"
       className="section-padding section-surface-warm"
     >
-      <div className="container-page">
+      <div
+        ref={ref}
+        className={`scroll-reveal container-page ${isVisible ? "is-visible" : ""}`}
+      >
         <SectionHeading
           eyebrow="Confianza"
           title="Por qué elegir Ausland Aventuras"
+          titleHighlight="Ausland Aventuras"
+          animateUnderline
           subtitle="Una forma simple de descubrir viajes y resolver tu consulta directo con nosotros."
           align="center"
         />
 
         <ul className="mt-10 grid list-none gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6">
-          {pillars.map((pillar) => (
+          {pillars.map((pillar, index) => (
             <li key={pillar.title}>
-              <article className="group relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-navy/8 transition duration-300 hover:-translate-y-0.5 hover:ring-sky/35 sm:p-8">
+              <article
+                data-card={index + 1}
+                className="why-ausland-card group relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-navy/8 transition-[transform,box-shadow] duration-300 ease-out hover:ring-sky/35 sm:p-8"
+              >
                 <div
-                  className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-sky/10 transition group-hover:bg-amber/15"
+                  className="why-ausland-card__accent absolute -right-8 -top-8 h-28 w-28 rounded-full bg-sky/10 transition group-hover:bg-amber/15"
                   aria-hidden
                 />
-                <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-navy text-white">
+                <div className="why-ausland-card__icon relative flex h-11 w-11 items-center justify-center rounded-2xl bg-navy text-white">
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
                     {pillar.icon}
                   </svg>
@@ -91,7 +107,7 @@ export function WhyAusland() {
           ))}
         </ul>
 
-        <p className="mt-8 text-center">
+        <p className="why-ausland-footer mt-8 text-center">
           <a
             href="/nosotros"
             className="text-sm font-semibold text-navy transition hover:text-sky focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"

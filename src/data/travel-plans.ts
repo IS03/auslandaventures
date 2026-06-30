@@ -810,16 +810,3 @@ export function getDestinationCardMeta(slug: string): DestinationCardMeta | null
 
   return { priceFrom, currency, planLine };
 }
-
-/** Imágenes de flyer para lightbox (una por variante de plan, sin duplicados). */
-export function getFlyerImagesForDestination(
-  slug: string,
-  fallbackImage?: string,
-): string[] {
-  const fromPlans = [...new Set(plansByDestination(slug).map((p) => p.image))].filter(
-    (img) => img !== FALLBACK_IMAGE,
-  );
-  if (fromPlans.length > 0) return fromPlans;
-  if (fallbackImage) return [fallbackImage];
-  return [];
-}
